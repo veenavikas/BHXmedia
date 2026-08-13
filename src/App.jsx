@@ -1,144 +1,165 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Marquee from './components/Marquee';
-import Services from './components/Services';
-import Process from './components/Process';
+import ProblemSection from './components/ProblemSection';
+import QuoteBlock from './components/QuoteBlock';
+import OfferLadder from './components/OfferLadder';
+import EngagementsSection from './components/EngagementsSection';
+import SelectedWorkTeaser from './components/SelectedWorkTeaser';
+import WhyMeSection from './components/WhyMeSection';
+import DifferentiationSection from './components/DifferentiationSection';
 import Portfolio from './components/Portfolio';
-import Stats from './components/Stats';
-import Testimonials from './components/Testimonials';
-import Pricing from './components/Pricing';
-import FAQ from './components/FAQ';
-import CtaBanner from './components/CtaBanner';
-import Footer from './components/Footer';
-import BookingModal from './components/BookingModal';
+import BlogView from './components/BlogView';
+import BlogPostView from './components/BlogPostView';
 import AboutView from './components/AboutView';
 import ContactView from './components/ContactView';
+import Footer from './components/Footer';
+import BookingModal from './components/BookingModal';
 import CustomCursor from './components/CustomCursor';
 
 export default function App() {
-  const [activeView, setActiveView] = useState('home'); // 'home' | 'services' | 'work' | 'pricing' | 'about' | 'contact'
+  const [activeView, setActiveView] = useState('home');
+  const [activeBlogSlug, setActiveBlogSlug] = useState(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [cursorState, setCursorState] = useState('default'); // 'default' | 'hover' | 'video'
+  const [cursorState, setCursorState] = useState('default');
   const [cursorText, setCursorText] = useState('');
+
+  // Synchronize state with URL pathname on load and popstate
+  useEffect(() => {
+    const syncRouteFromUrl = () => {
+      const path = window.location.pathname;
+      if (path.startsWith('/blog/')) {
+        const slug = path.replace('/blog/', '');
+        setActiveView('blog');
+        setActiveBlogSlug(slug);
+      } else if (path === '/blog') {
+        setActiveView('blog');
+        setActiveBlogSlug(null);
+      } else if (path === '/work') {
+        setActiveView('work');
+        setActiveBlogSlug(null);
+      } else if (path === '/about') {
+        setActiveView('about');
+        setActiveBlogSlug(null);
+      } else if (path === '/contact') {
+        setActiveView('contact');
+        setActiveBlogSlug(null);
+      } else {
+        setActiveView('home');
+        setActiveBlogSlug(null);
+      }
+    };
+
+    syncRouteFromUrl();
+    window.addEventListener('popstate', syncRouteFromUrl);
+    return () => window.removeEventListener('popstate', syncRouteFromUrl);
+  }, []);
+
+  const navigateTo = (view, blogSlug = null) => {
+    setActiveView(view);
+    setActiveBlogSlug(blogSlug);
+
+    let path = '/';
+    if (view === 'work') path = '/work';
+    else if (view === 'blog') path = blogSlug ? `/blog/${blogSlug}` : '/blog';
+    else if (view === 'about') path = '/about';
+    else if (view === 'contact') path = '/contact';
+
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleOpenBooking = () => setIsBookingOpen(true);
   const handleCloseBooking = () => setIsBookingOpen(false);
 
-  const handleCursorEnter = () => setCursorState('hover');
+  const handleCursorVideoEnter = (text = 'PLAY') => {
+    setCursorState('video');
+    setCursorText(text);
+  };
+
   const handleCursorLeave = () => {
     setCursorState('default');
     setCursorText('');
   };
 
-  const handleCursorVideoEnter = (text = 'PLAY REEL') => {
-    setCursorState('video');
-    setCursorText(text);
-  };
-
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', position: 'relative' }}>
-      {/* Global Interactive Custom Magnetic Cursor */}
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--paper)', color: 'var(--ink)', position: 'relative' }}>
+      
+      {/* Custom Interactive 3D Cursor */}
       <CustomCursor cursorState={cursorState} cursorText={cursorText} />
 
-      {/* Floating Centered Glass Pill Navbar */}
+      {/* Floating Modern Header */}
       <Navbar
         activeView={activeView}
-        setActiveView={setActiveView}
+        setActiveView={(view) => navigateTo(view, null)}
         onOpenBooking={handleOpenBooking}
-        onCursorEnter={handleCursorEnter}
-        onCursorLeave={handleCursorLeave}
       />
 
-      {/* Main Dynamic View Content */}
+      {/* Dynamic View Content */}
       <main>
         {activeView === 'home' && (
           <>
-            <Hero
-              onOpenBooking={handleOpenBooking}
-              onSelectWork={() => {
-                const element = document.querySelector('#work');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <Hero onOpenBooking={handleOpenBooking} />
+            <ProblemSection />
+            <QuoteBlock />
+            <OfferLadder />
+            <EngagementsSection onOpenBooking={handleOpenBooking} />
+            <SelectedWorkTeaser 
+              onSelectWork={() => navigateTo('work')} 
               onCursorVideoEnter={handleCursorVideoEnter}
               onCursorLeave={handleCursorLeave}
             />
-            <Marquee />
-            <Services onOpenBooking={handleOpenBooking} />
-            <Process onOpenBooking={handleOpenBooking} />
-            <Portfolio
-              onOpenBooking={handleOpenBooking}
-              onCursorVideoEnter={handleCursorVideoEnter}
-              onCursorLeave={handleCursorLeave}
-            />
-            <Stats />
-            <Testimonials />
-            <Pricing
-              onOpenBooking={handleOpenBooking}
-              onCursorEnter={handleCursorEnter}
-              onCursorLeave={handleCursorLeave}
-            />
-            <FAQ onOpenBooking={handleOpenBooking} />
-            <CtaBanner onOpenBooking={handleOpenBooking} />
-          </>
-        )}
-
-        {activeView === 'services' && (
-          <>
-            <Services onOpenBooking={handleOpenBooking} />
-            <Process onOpenBooking={handleOpenBooking} />
-            <CtaBanner onOpenBooking={handleOpenBooking} />
+            <WhyMeSection />
+            <DifferentiationSection />
           </>
         )}
 
         {activeView === 'work' && (
-          <>
-            <Portfolio
-              onOpenBooking={handleOpenBooking}
-              onCursorVideoEnter={handleCursorVideoEnter}
-              onCursorLeave={handleCursorLeave}
-            />
-            <CtaBanner onOpenBooking={handleOpenBooking} />
-          </>
+          <Portfolio 
+            onOpenBooking={handleOpenBooking}
+            onCursorVideoEnter={handleCursorVideoEnter}
+            onCursorLeave={handleCursorLeave}
+          />
         )}
 
-        {activeView === 'pricing' && (
-          <>
-            <Pricing
+        {activeView === 'blog' && (
+          activeBlogSlug ? (
+            <BlogPostView 
+              postSlug={activeBlogSlug} 
+              onBack={() => navigateTo('blog', null)}
               onOpenBooking={handleOpenBooking}
-              onCursorEnter={handleCursorEnter}
-              onCursorLeave={handleCursorLeave}
             />
-            <FAQ onOpenBooking={handleOpenBooking} />
-            <CtaBanner onOpenBooking={handleOpenBooking} />
-          </>
+          ) : (
+            <BlogView 
+              onSelectPost={(slug) => navigateTo('blog', slug)}
+              onOpenBooking={handleOpenBooking}
+            />
+          )
         )}
 
         {activeView === 'about' && (
-          <>
-            <AboutView onOpenBooking={handleOpenBooking} />
-            <CtaBanner onOpenBooking={handleOpenBooking} />
-          </>
+          <AboutView onOpenBooking={handleOpenBooking} />
         )}
 
         {activeView === 'contact' && (
-          <>
-            <ContactView onOpenBooking={handleOpenBooking} />
-          </>
+          <ContactView onOpenBooking={handleOpenBooking} />
         )}
       </main>
 
       {/* Footer */}
       <Footer
-        setActiveView={setActiveView}
+        setActiveView={(view) => navigateTo(view, null)}
         onOpenBooking={handleOpenBooking}
       />
 
-      {/* Interactive Call Booking Modal */}
+      {/* Booking Calendar Modal */}
       <BookingModal
         isOpen={isBookingOpen}
         onClose={handleCloseBooking}
       />
+
     </div>
   );
 }

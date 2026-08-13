@@ -1,109 +1,97 @@
-import React from 'react';
-import { X, Play, Eye, CheckCircle2, Award, Sparkles, PhoneCall } from 'lucide-react';
+import React, { useEffect } from 'react';
 
-export default function VideoModal({ item, onClose, onOpenBooking }) {
-  if (!item) return null;
+export default function VideoModal({ isOpen, onClose, videoItem }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  if (!isOpen || !videoItem) return null;
+
+  // Helper to extract YouTube embed URL
+  const getEmbedUrl = (url) => {
+    if (!url) return '';
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      let videoId = '';
+      if (url.includes('youtu.be')) {
+        videoId = url.split('youtu.be/')[1]?.split('?')[0];
+      } else if (url.includes('youtube.com/watch')) {
+        const urlParams = new URLSearchParams(url.split('?')[1]);
+        videoId = urlParams.get('v');
+      }
+      return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : url;
+    }
+    if (url.includes('vimeo.com')) {
+      const vimeoId = url.split('vimeo.com/')[1]?.split('?')[0];
+      return vimeoId ? `https://player.vimeo.com/video/${vimeoId}?autoplay=1` : url;
+    }
+    return url;
+  };
+
+  const embedUrl = getEmbedUrl(videoItem.url);
+  const isDirectVideo = embedUrl.endsWith('.mp4') || embedUrl.endsWith('.webm') || embedUrl.endsWith('.mov');
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '950px', padding: '0' }}>
-        {/* Video Player Header Frame */}
-        <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', backgroundColor: '#000000' }}>
-          <video
-            controls
-            autoPlay
-            src={item.videoUrl}
-            poster={item.thumbnail}
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          />
-          <button
-            onClick={onClose}
-            style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              backgroundColor: 'rgba(0, 0, 0, 0.6)',
-              backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: '#FFFFFF',
-              borderRadius: '50%',
-              width: '38px',
-              height: '38px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 10,
-            }}
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Modal Details Section */}
-        <div style={{ padding: '2.25rem' }}>
-          {/* Header & Meta */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
-            <span className="badge badge-accent">{item.category}</span>
-            <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>• {item.client}</span>
-            <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <Eye size={14} /> {item.views} Views
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <div 
+        className="modal-box" 
+        onClick={(e) => e.stopPropagation()} 
+        style={{ maxWidth: '960px', padding: 0, overflow: 'hidden', background: '#141416', borderRadius: '4px' }}
+      >
+        
+        {/* Modal Header Bar */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderBottom: '1px solid #2A2A2E', color: '#F6F4EF' }}>
+          <div>
+            <span className="mono" style={{ color: 'var(--red)', fontSize: '10px', display: 'block' }}>
+              {videoItem.format}
+            </span>
+            <span className="serif" style={{ fontSize: '18px', fontWeight: 500 }}>
+              {videoItem.title}
             </span>
           </div>
 
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
-            {item.title}
-          </h2>
-
-          <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2rem' }}>
-            {item.summary}
-          </p>
-
-          {/* Results & Key Performance Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-            {/* Results Box */}
-            <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--accent-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Award size={16} /> Key Metrics Achieved
-              </h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {item.results.map((res, idx) => (
-                  <li key={idx} style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--accent-primary)' }} />
-                    {res}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Deliverables Box */}
-            <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <CheckCircle2 size={16} /> Scope Delivered
-              </h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {item.deliverables.map((del, idx) => (
-                  <li key={idx} style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <CheckCircle2 size={14} style={{ color: 'var(--accent-primary)' }} />
-                    {del}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Modal Footer CTA */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)', flexWrap: 'wrap', gap: '1rem' }}>
-            <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Want similar retention results for your channel?</span>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <button onClick={onClose} className="btn btn-secondary">Close Case Study</button>
-              <button onClick={() => { onClose(); onOpenBooking(); }} className="btn btn-primary">
-                <PhoneCall size={16} />
-                <span>Book a Call For This Style</span>
-              </button>
-            </div>
-          </div>
+          <button 
+            onClick={onClose}
+            style={{ background: 'none', border: '1px solid #444', color: '#FFF', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer' }}
+            aria-label="Close modal"
+          >
+            <span className="mono" style={{ color: '#FFF', fontSize: '11px' }}>CLOSE ✕</span>
+          </button>
         </div>
+
+        {/* Video Player Container */}
+        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#000' }}>
+          {isDirectVideo ? (
+            <video 
+              src={embedUrl} 
+              controls 
+              autoPlay 
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          ) : (
+            <iframe 
+              src={embedUrl} 
+              title={videoItem.title}
+              style={{ width: '100%', height: '100%', border: 'none' }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          )}
+        </div>
+
+        {/* Modal Footer with Case Result */}
+        {videoItem.result && (
+          <div style={{ padding: '16px 20px', background: '#1C1C1F', color: '#D1D0C9', fontSize: '14px' }}>
+            <span className="mono" style={{ color: 'var(--grey)', marginRight: '8px' }}>RESULT:</span>
+            {videoItem.result}
+          </div>
+        )}
+
       </div>
     </div>
   );

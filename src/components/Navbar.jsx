@@ -1,282 +1,129 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Video, Menu, X, ArrowRight, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import Magnet from './Magnet';
 
-export default function Navbar({ activeView, setActiveView, onOpenBooking, onCursorEnter, onCursorLeave }) {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({ activeView, setActiveView, onOpenBooking }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navLinks = [
-    { label: 'Home', view: 'home', hash: '#home' },
-    { label: 'Services', view: 'services', hash: '#services' },
-    { label: 'Campaigns', view: 'work', hash: '#work' },
-    { label: 'Packages', view: 'pricing', hash: '#pricing' },
-    { label: 'Agency', view: 'about', hash: '#about' },
-    { label: 'Contact', view: 'contact', hash: '#contact' },
-  ];
-
-  const handleNavClick = (view, hash) => {
-    setActiveView(view);
+  const handleNavClick = (viewId) => {
+    setActiveView(viewId);
     setMobileMenuOpen(false);
-    
-    if (view === 'home' || hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
   };
 
+  const navLinks = [
+    { id: 'home', label: 'Home' },
+    { id: 'work', label: 'Portfolio' },
+    { id: 'blog', label: 'Journal' },
+    { id: 'about', label: 'Proof' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: '12px',
-        left: 0,
-        right: 0,
-        zIndex: 900,
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '0 1rem',
-        transition: 'all 0.3s ease',
-      }}
-    >
-      {/* Floating Centered Glass Pill Container */}
-      <motion.div
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          width: '100%',
-          maxWidth: '1100px',
-          height: '64px',
-          borderRadius: '9999px',
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.88)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid var(--border-subtle)',
-          boxShadow: scrolled ? '0 12px 35px rgba(0, 0, 0, 0.08)' : '0 4px 20px rgba(0, 0, 0, 0.04)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 1.25rem',
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
-      >
-        {/* Brand Logo */}
-        <a
-          href="#home"
-          onMouseEnter={onCursorEnter}
-          onMouseLeave={onCursorLeave}
-          onClick={(e) => {
-            e.preventDefault();
-            handleNavClick('home', '#home');
-          }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.65rem',
-            textDecoration: 'none',
-            color: 'var(--text-primary)',
-          }}
-        >
-          <div
-            style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-primary)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#FFFFFF',
-              boxShadow: '0 4px 14px rgba(255, 77, 46, 0.35)',
-            }}
+    <header className="floating-nav-container">
+      
+      {/* Floating Centered Glass Pill Navbar Bar */}
+      <div className="floating-nav-pill">
+        
+        {/* Brand Logo & Subtitle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <button 
+            onClick={() => handleNavClick('home')} 
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' }}
+            aria-label="BHX Media Home"
           >
-            <Video size={18} strokeWidth={2.5} />
-          </div>
-          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '-0.04em', lineHeight: 1 }}>
-            BHX<span style={{ color: 'var(--accent-primary)' }}>.</span>MEDIA
+            <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 600, fontSize: '28px', letterSpacing: '-0.01em', color: 'var(--ink)' }}>
+              BHX<span className="stop">.</span>
+            </span>
+          </button>
+          <span className="mono brand-sub" style={{ fontSize: '11px', color: 'var(--grey)', display: 'none', letterSpacing: '0.12em' }}>
+            Better. Human. eXecution.
           </span>
-        </a>
-
-        {/* Desktop Nav Links with Framer Motion Gliding Pill */}
-        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              backgroundColor: 'var(--bg-secondary)',
-              borderRadius: 'var(--radius-full)',
-              padding: '0.25rem',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
-            {navLinks.map((link) => {
-              const isActive = activeView === link.view;
-              return (
-                <button
-                  key={link.view}
-                  onClick={() => handleNavClick(link.view, link.hash)}
-                  onMouseEnter={onCursorEnter}
-                  onMouseLeave={onCursorLeave}
-                  style={{
-                    position: 'relative',
-                    background: 'none',
-                    border: 'none',
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    color: isActive ? '#FFFFFF' : 'var(--text-primary)',
-                    cursor: 'pointer',
-                    padding: '0.45rem 1.15rem',
-                    borderRadius: 'var(--radius-full)',
-                    zIndex: 1,
-                    transition: 'color 0.25s ease',
-                  }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavPill"
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        backgroundColor: 'var(--accent-primary)',
-                        borderRadius: 'var(--radius-full)',
-                        zIndex: -1,
-                        boxShadow: '0 4px 14px rgba(255, 77, 46, 0.35)',
-                      }}
-                      transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                    />
-                  )}
-                  {link.label}
-                </button>
-              );
-            })}
-          </div>
-        </nav>
-
-        {/* Primary Campaign Call CTA */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          <button
-            onClick={onOpenBooking}
-            onMouseEnter={onCursorEnter}
-            onMouseLeave={onCursorLeave}
-            className="btn btn-primary"
-            style={{
-              padding: '0.6rem 1.35rem',
-              fontSize: '0.85rem',
-            }}
-          >
-            <span>Start a Campaign</span>
-            <ArrowRight size={15} />
-          </button>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{
-              display: 'none',
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '50%',
-              width: '38px',
-              height: '38px',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: 'var(--text-primary)',
-            }}
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </div>
-      </motion.div>
 
-      {/* Full Screen Animated Mobile Glass Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            style={{
-              position: 'fixed',
-              top: '84px',
-              left: '1rem',
-              right: '1rem',
-              backgroundColor: 'rgba(255, 255, 255, 0.96)',
-              backdropFilter: 'blur(24px)',
-              borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--border-subtle)',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
-              padding: '2rem 1.5rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.25rem',
-              zIndex: 999,
-            }}
-          >
-            {navLinks.map((link) => (
-              <button
-                key={link.view}
-                onClick={() => handleNavClick(link.view, link.hash)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 800,
-                  fontSize: '1.6rem',
-                  letterSpacing: '-0.03em',
-                  color: activeView === link.view ? 'var(--accent-primary)' : 'var(--text-primary)',
-                  padding: '0.4rem 0',
-                  cursor: 'pointer',
-                  display: 'flex',
+        {/* Focused Desktop Navigation Links with Active Pill Highlights */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="desktop-nav">
+          {navLinks.map(link => {
+            const isActive = activeView === link.id;
+            return (
+              <button 
+                key={link.id}
+                onClick={() => handleNavClick(link.id)} 
+                style={{ 
+                  background: isActive ? 'var(--ink)' : 'transparent', 
+                  color: isActive ? 'var(--paper)' : 'var(--ink)',
+                  border: 'none', 
+                  cursor: 'pointer', 
+                  fontFamily: 'var(--font-sans)', 
+                  fontSize: '14px', 
+                  fontWeight: isActive ? 600 : 500, 
+                  padding: '6px 14px',
+                  borderRadius: '999px',
+                  transition: 'all 0.2s ease',
+                  display: 'inline-flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
+                  gap: '6px'
                 }}
               >
-                <span>{link.label}</span>
-                {activeView === link.view && <span style={{ fontSize: '1rem' }}>●</span>}
+                {isActive && <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--red)' }} />}
+                {link.label}
               </button>
-            ))}
+            );
+          })}
+        </nav>
 
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="btn btn-primary btn-lg"
-              style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}
+        {/* Primary CTA & Mobile Toggle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Magnet strength={12}>
+            <button 
+              onClick={onOpenBooking} 
+              className="btn btn-primary"
+              style={{ fontSize: '13px', padding: '10px 18px', fontWeight: 600 }}
             >
-              <span>Start a Campaign</span>
-              <ArrowRight size={18} />
+              Book a 30-min audit
             </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </Magnet>
+
+          {/* Mobile Toggle Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{ background: 'none', border: '1px solid var(--hairline)', padding: '6px 10px', borderRadius: '4px', cursor: 'pointer', display: 'none' }}
+            aria-label="Toggle navigation menu"
+            className="mobile-toggle"
+          >
+            <span className="mono" style={{ fontSize: '11px', fontWeight: 600 }}>{mobileMenuOpen ? 'CLOSE' : 'MENU'}</span>
+          </button>
+        </div>
+
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div style={{ marginTop: '8px', padding: '20px', backgroundColor: 'rgba(246, 244, 239, 0.96)', backdropFilter: 'blur(16px)', border: '1px solid var(--hairline)', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '14px', boxShadow: '0 12px 36px rgba(0,0,0,0.12)' }}>
+          {navLinks.map(link => (
+            <button 
+              key={link.id}
+              onClick={() => handleNavClick(link.id)} 
+              style={{ 
+                textAlign: 'left', 
+                background: 'none', 
+                border: 'none', 
+                fontSize: '16px', 
+                fontWeight: activeView === link.id ? 600 : 400,
+                color: activeView === link.id ? 'var(--red)' : 'var(--ink)'
+              }}
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       <style>{`
-        @media (max-width: 900px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-menu-btn {
-            display: flex !important;
-          }
+        @media (min-width: 768px) {
+          .brand-sub { display: inline !important; }
+        }
+        @media (max-width: 820px) {
+          .desktop-nav { display: none !important; }
+          .mobile-toggle { display: block !important; }
         }
       `}</style>
     </header>

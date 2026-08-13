@@ -1,0 +1,56 @@
+[
+  {
+    "id": "work-1",
+    "title": "Regional Micro-Drama Slate Launch",
+    "format": "Micro-drama",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1000&q=80",
+    "client": "Micro-Drama Slate (58+ Shows)",
+    "result": "Scaled serialized micro-drama output from 15 to 58+ shows across 4 South Indian languages."
+  },
+  {
+    "id": "work-2",
+    "title": "Amazon India In-House Studio Campaign",
+    "format": "Commercial and ad films",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80",
+    "client": "Amazon India Marketing",
+    "result": "Built in-house studio producing 500+ TVCs and 50,000+ marketing assets."
+  },
+  {
+    "id": "work-3",
+    "title": "GI-Tagged Handicrafts D2C Conversion Campaign",
+    "format": "Digital ads",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1000&q=80",
+    "client": "GI Artisans D2C Collective",
+    "result": "Full content-to-sales pipeline connecting brand story to e-commerce performance."
+  },
+  {
+    "id": "work-4",
+    "title": "Enterprise Talent Acquisition & Employer Story",
+    "format": "Employer-brand content",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
+    "client": "Tech & Media Enterprise",
+    "result": "Authentic operator-level narrative driving high-value senior talent recruitment."
+  },
+  {
+    "id": "work-5",
+    "title": "Sun TV Network Broadcast Non-Fiction",
+    "format": "TV non-fiction",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1000&q=80",
+    "client": "Sun TV Network & Radio",
+    "result": "Mass-market broadcast programming with high audience retention."
+  },
+  {
+    "id": "work-6",
+    "title": "Serialized Episodic TV Fiction Slate",
+    "format": "TV fiction",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80",
+    "client": "Regional Broadcast Slate",
+    "result": "Primetime narrative programming with multi-season viewer affinity."
+  }
+]

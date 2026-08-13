@@ -1,252 +1,176 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Calendar, Sparkles } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { SITE_CONTENT } from '../data/siteContent';
 
 export default function ContactView({ onOpenBooking }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    projectType: 'Vlogging Production',
-    budget: '$2,500 – $5,000',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', honeypot: '' });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    
+    // Honeypot bot protection check
+    if (formData.honeypot) {
+      console.warn('Spam detected via honeypot.');
+      setStatus('success'); // Pretend success to bot
+      return;
+    }
+
+    setStatus('submitting');
+
     try {
-      confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-    } catch (err) {}
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '', honeypot: '' });
+      } else {
+        // Direct email fallback if backend endpoint isn't live
+        window.location.href = `mailto:bharath@bhxmedia.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+        setStatus('success');
+      }
+    } catch (err) {
+      // Direct mailto fallback on fetch error
+      window.location.href = `mailto:bharath@bhxmedia.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+      setStatus('success');
+    }
   };
 
   return (
-    <section className="section" style={{ backgroundColor: 'var(--bg-primary)', paddingTop: '3rem' }}>
-      <div className="container">
-        {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4rem' }}>
-          <span className="badge badge-accent" style={{ marginBottom: '0.85rem' }}>
-            Get in Touch
-          </span>
-          <h1 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.8rem)', fontWeight: 800, marginBottom: '1.25rem', letterSpacing: '-0.03em' }}>
-            Start Your Next Video Project
-          </h1>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            Ready to upgrade your editing pipeline or schedule an on-location shoot? Send us a message below or book a calendar call directly.
-          </p>
-        </div>
-
-        {/* Contact Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', maxWidth: '1100px', margin: '0 auto' }}>
-          {/* Direct Info Card */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-            <div className="card-light" style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '12px', backgroundColor: 'var(--accent-primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Calendar size={22} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>Instant Call Booking</h3>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Skip the email back-and-forth</span>
-                </div>
-              </div>
-
-              <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', lineHeight: 1.5 }}>
-                Select a 20-minute video slot directly on our team calendar for immediate onboarding.
-              </p>
-
-              <button onClick={onOpenBooking} className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                <span>Open Calendar Picker</span>
-              </button>
-            </div>
-
-            {/* Direct Contact Links */}
-            <div className="card-light" style={{ padding: '2rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-lg)' }}>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '1.25rem', color: 'var(--text-primary)' }}>
-                Direct Studio Contacts
-              </h3>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: 'var(--accent-light)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Mail size={18} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Inquiries Email</div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)' }}>hello@bhxmedia.com</div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: 'var(--accent-light)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Clock size={18} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Response SLA</div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)' }}>Under 4 Business Hours</div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: 'var(--accent-light)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <MapPin size={18} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Studio Hubs</div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)' }}>Los Angeles, CA • London, UK</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="card-light" style={{ padding: '2.5rem', backgroundColor: '#FFFFFF', borderRadius: 'var(--radius-xl)' }}>
-            {submitted ? (
-              <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-                <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'var(--accent-light)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
-                  <CheckCircle size={36} />
-                </div>
-                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-                  Message Received!
-                </h3>
-                <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                  Thanks <strong>{formData.name}</strong>. Our senior producer will review your brief and reply to <strong>{formData.email}</strong> within 4 hours.
-                </p>
-                <button onClick={() => setSubmitted(false)} className="btn btn-secondary">
-                  Send Another Message
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
-                  Send a Project Inquiry
-                </h3>
-
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Your name or channel name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    style={{
-                      width: '100%',
-                      padding: '0.8rem 1rem',
-                      borderRadius: 'var(--radius-sm)',
-                      border: '1px solid var(--border-subtle)',
-                      outline: 'none',
-                      fontSize: '0.95rem',
-                    }}
-                  />
-                </div>
-
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="you@domain.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    style={{
-                      width: '100%',
-                      padding: '0.8rem 1rem',
-                      borderRadius: 'var(--radius-sm)',
-                      border: '1px solid var(--border-subtle)',
-                      outline: 'none',
-                      fontSize: '0.95rem',
-                    }}
-                  />
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.25rem' }}>
-                  <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                      Primary Service
-                    </label>
-                    <select
-                      value={formData.projectType}
-                      onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      style={{
-                        width: '100%',
-                        padding: '0.8rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
-                        border: '1px solid var(--border-subtle)',
-                        outline: 'none',
-                        fontSize: '0.95rem',
-                        backgroundColor: '#FFFFFF',
-                      }}
-                    >
-                      <option value="Vlogging Production">Vlogging Production</option>
-                      <option value="Shorts & Reels Editing">Shorts & Reels Editing</option>
-                      <option value="Podcast Production">Podcast Production</option>
-                      <option value="Brand & Commercial Shoot">Brand & Commercial Shoot</option>
-                      <option value="Post-Production / Color / Sound">Post-Production / Color / Sound</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                      Monthly Budget
-                    </label>
-                    <select
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      style={{
-                        width: '100%',
-                        padding: '0.8rem 1rem',
-                        borderRadius: 'var(--radius-sm)',
-                        border: '1px solid var(--border-subtle)',
-                        outline: 'none',
-                        fontSize: '0.95rem',
-                        backgroundColor: '#FFFFFF',
-                      }}
-                    >
-                      <option value="$1,500 – $2,500">$1,500 – $2,500</option>
-                      <option value="$2,500 – $5,000">$2,500 – $5,000</option>
-                      <option value="$5,000 – $10,000">$5,000 – $10,000</option>
-                      <option value="$10,000+ Custom">$10,000+ Custom</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div style={{ marginBottom: '1.75rem' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                    Project Brief / Notes *
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    placeholder="Tell us about your channel goals, upload frequency, or footage details..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    style={{
-                      width: '100%',
-                      padding: '0.8rem 1rem',
-                      borderRadius: 'var(--radius-sm)',
-                      border: '1px solid var(--border-subtle)',
-                      outline: 'none',
-                      fontSize: '0.95rem',
-                      resize: 'vertical',
-                    }}
-                  />
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
-                  <Send size={18} />
-                  <span>Submit Inquiry</span>
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
+    <div className="wrap" style={{ paddingTop: '110px', paddingBottom: '100px' }}>
+      
+      <div className="mono sec-header">
+        <span className="num">05</span> CONTACT & BOOKING
       </div>
-    </section>
+
+      <div style={{ marginBottom: '40px' }}>
+        <h1 className="section-title" style={{ fontSize: 'clamp(32px, 5vw, 48px)', marginBottom: '16px' }}>
+          Let's discuss your content engine<span className="stop">.</span>
+        </h1>
+        <p className="body-text" style={{ fontSize: '18px', color: 'var(--grey)', maxWidth: '640px' }}>
+          Schedule a 30-minute content audit or send a direct inquiry to discuss fractional content strategy or custom engagements.
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'start' }}>
+        
+        {/* Primary CTA Box: Booking Audit */}
+        <div className="editorial-card" style={{ background: '#FFFFFF', padding: '32px' }}>
+          <span className="mono" style={{ color: 'var(--red)', marginBottom: '8px', display: 'block' }}>
+            PRIMARY ACTION
+          </span>
+          <h2 className="card-title" style={{ fontSize: '24px', marginBottom: '16px' }}>
+            Book a 30-minute content audit
+          </h2>
+          <p className="body-text" style={{ fontSize: '15px', color: '#2F2F31', marginBottom: '24px' }}>
+            Diagnose where your content leaks money, evaluate your AI output quality, and get a clear strategic plan.
+          </p>
+          <button onClick={onOpenBooking} className="btn btn-primary" style={{ width: '100%', padding: '14px' }}>
+            Open Booking Calendar →
+          </button>
+        </div>
+
+        {/* Secondary Contact Form */}
+        <div className="editorial-card" style={{ padding: '32px' }}>
+          <span className="mono" style={{ color: 'var(--grey)', marginBottom: '8px', display: 'block' }}>
+            DIRECT INQUIRY
+          </span>
+          <h2 className="card-title" style={{ fontSize: '24px', marginBottom: '20px' }}>
+            Send a message
+          </h2>
+
+          {status === 'success' ? (
+            <div style={{ background: 'var(--paper)', border: '1px solid var(--hairline)', padding: '24px', borderRadius: '2px' }}>
+              <span className="mono" style={{ color: 'var(--red)', display: 'block', marginBottom: '8px' }}>MESSAGE RECEIVED</span>
+              <p className="serif" style={{ fontSize: '20px', fontWeight: 500, color: 'var(--ink)' }}>
+                Thank you for reaching out<span className="stop">.</span>
+              </p>
+              <p className="body-text" style={{ fontSize: '14px', color: 'var(--grey)', marginTop: '8px' }}>
+                Bharath will review your message and reply within 24 business hours.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              
+              {/* Anti-spam Honeypot */}
+              <input 
+                type="text" 
+                name="b_hp_check" 
+                className="honey-field"
+                value={formData.honeypot}
+                onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                tabIndex="-1"
+                autocomplete="off"
+              />
+
+              <div className="form-group">
+                <label className="form-label">Your Name</label>
+                <input 
+                  type="text" 
+                  className="form-input"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Bharath C.S."
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Email Address</label>
+                <input 
+                  type="email" 
+                  className="form-input"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="name@company.com"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Message / Goal</label>
+                <textarea 
+                  className="form-textarea"
+                  rows="4"
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="Tell us about your content goals or current challenges..."
+                />
+              </div>
+
+              <button 
+                type="submit" 
+                className="btn btn-ghost" 
+                style={{ width: '100%', marginTop: '8px' }}
+                disabled={status === 'submitting'}
+              >
+                {status === 'submitting' ? 'Sending...' : 'Send Direct Message'}
+              </button>
+            </form>
+          )}
+
+          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--hairline)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <span className="mono">DIRECT CHANNELS</span>
+            <a href="mailto:bharath@bhxmedia.com" style={{ color: 'var(--ink)', fontSize: '14px', textDecoration: 'underline' }}>
+              bharath@bhxmedia.com
+            </a>
+            <a href={SITE_CONTENT.brand.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--grey)', fontSize: '14px' }}>
+              LinkedIn Profile ↗
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
   );
 }

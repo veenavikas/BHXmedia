@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>BHX Media Journal — AI Content Strategy &amp; Quality Control</title>
+  <link>https://bhxmedia.com/blog</link>
+  <description>Restrained, fact-driven analysis on AI content strategy, ROI unit economics, and quality control frameworks by Bharath C.S.</description>
+  <language>en-us</language>
+  <atom:link href="https://bhxmedia.com/rss.xml" rel="self" type="application/rss+xml" />
+  
+  <item>
+    <title>Most AI content is worthless. Here is how to tell what is not.</title>
+    <link>https://bhxmedia.com/blog/most-ai-content-is-worthless</link>
+    <description>AI content quality control is the structured process of applying editorial judgment to automated outputs before distribution.</description>
+    <pubDate>Mon, 10 Aug 2026 00:00:00 GMT</pubDate>
+    <guid>https://bhxmedia.com/blog/most-ai-content-is-worthless</guid>
+  </item>
+
+  <item>
+    <title>The unit economics of content in the AI era.</title>
+    <link>https://bhxmedia.com/blog/unit-economics-of-ai-content</link>
+    <description>Content unit economics measures the total cost of production and distribution relative to net revenue generated.</description>
+    <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+    <guid>https://bhxmedia.com/blog/unit-economics-of-ai-content</guid>
+  </item>
+
+  <item>
+    <title>What to stop making now that AI makes everything cheap.</title>
+    <link>https://bhxmedia.com/blog/what-to-stop-making</link>
+    <description>Content elimination strategy is the deliberate practice of pruning low-value media formats.</description>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+    <guid>https://bhxmedia.com/blog/what-to-stop-making</guid>
+  </item>
+
+  <item>
+    <title>Reach is not results. How to make AI content that converts.</title>
+    <link>https://bhxmedia.com/blog/reach-is-not-results</link>
+    <description>Conversion-led AI content is media engineered to move prospects along a specific buying journey.</description>
+    <pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
+    <guid>https://bhxmedia.com/blog/reach-is-not-results</guid>
+  </item>
+</channel>
+</rss>
