@@ -26,6 +26,8 @@ app.add_middleware(
 
 class ContactFormSubmission(BaseModel):
     name: str
+    company: Optional[str] = None
+    phone: Optional[str] = None
     email: EmailStr
     message: str
     b_hp_check: Optional[str] = None  # Honeypot field for bot prevention
@@ -38,11 +40,11 @@ class WorkItem(BaseModel):
     client: Optional[str] = None
     result: Optional[str] = None
 
-def send_email_notification(name: str, email: str, message: str):
+def send_email_notification(name: str, email: str, message: str, company: Optional[str] = None, phone: Optional[str] = None):
     """
     Background worker function to forward contact submissions to bharath@bhxmedia.com.
     """
-    logger.info(f"Notification queued for Bharath C.S. <bharath@bhxmedia.com> from {name} <{email}>")
+    logger.info(f"Notification queued for Bharath C.S. <bharath@bhxmedia.com> from {name} <{email}> (Company: {company}, Phone: {phone})")
     # In production, SMTP or email service provider API (SendGrid, SES, Mailgun) is triggered here.
     logger.info(f"Message content: {message}")
 
@@ -65,7 +67,9 @@ async def handle_contact(submission: ContactFormSubmission, background_tasks: Ba
         send_email_notification,
         name=submission.name,
         email=submission.email,
-        message=submission.message
+        message=submission.message,
+        company=submission.company,
+        phone=submission.phone
     )
 
     return {

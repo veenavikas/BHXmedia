@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { SITE_CONTENT } from '../data/siteContent';
 
+const EMAILJS_SERVICE_ID = 'service_wxe35ln';
+const EMAILJS_TEMPLATE_ID = 'template_wj7l5d4';
+const EMAILJS_PUBLIC_KEY = 'iNvbvLAiTusygW_J6';
+
 export default function ContactView({ onOpenBooking }) {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '', honeypot: '' });
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    company: '', 
+    phone: '', 
+    email: '', 
+    message: '', 
+    honeypot: '' 
+  });
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
 
   const handleSubmit = async (e) => {
@@ -17,28 +29,33 @@ export default function ContactView({ onOpenBooking }) {
 
     setStatus('submitting');
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
-        })
-      });
+    const templateParams = {
+      name: formData.name,
+      from_name: formData.name,
+      user_name: formData.name,
+      email: formData.email,
+      from_email: formData.email,
+      user_email: formData.email,
+      reply_to: formData.email,
+      company: formData.company || 'N/A',
+      phone: formData.phone || 'N/A',
+      message: formData.message
+    };
 
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '', honeypot: '' });
-      } else {
-        // Direct email fallback if backend endpoint isn't live
-        window.location.href = `mailto:bharath@bhxmedia.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
-        setStatus('success');
-      }
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setStatus('success');
+      setFormData({ name: '', company: '', phone: '', email: '', message: '', honeypot: '' });
     } catch (err) {
-      // Direct mailto fallback on fetch error
-      window.location.href = `mailto:bharath@bhxmedia.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+      console.error('EmailJS error, attempting mailto fallback:', err);
+      const mailBody = `Name: ${formData.name}\nCompany: ${formData.company || 'N/A'}\nPhone: ${formData.phone || 'N/A'}\nEmail: ${formData.email}\n\nGoals / Message:\n${formData.message}`;
+      window.location.href = `mailto:bharath@bhxmedia.com?subject=Contact%20from%20${encodeURIComponent(formData.name)}%20(${encodeURIComponent(formData.company || 'Direct')})&body=${encodeURIComponent(mailBody)}`;
       setStatus('success');
     }
   };
@@ -72,9 +89,20 @@ export default function ContactView({ onOpenBooking }) {
           <p className="body-text" style={{ fontSize: '15px', color: '#2F2F31', marginBottom: '24px' }}>
             Diagnose where your content leaks money, evaluate your AI output quality, and get a clear strategic plan.
           </p>
-          <button onClick={onOpenBooking} className="btn btn-primary" style={{ width: '100%', padding: '14px' }}>
+          <button onClick={onOpenBooking} className="btn btn-primary" style={{ width: '100%', padding: '14px', marginBottom: '12px' }}>
             Open Booking Calendar →
           </button>
+          <div style={{ textAlign: 'center' }}>
+            <a 
+              href={SITE_CONTENT.brand.calendlyUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mono" 
+              style={{ fontSize: '12px', color: 'var(--grey)', textDecoration: 'underline' }}
+            >
+              Or open directly on Calendly.com ↗
+            </a>
+          </div>
         </div>
 
         {/* Secondary Contact Form */}
@@ -111,7 +139,7 @@ export default function ContactView({ onOpenBooking }) {
               />
 
               <div className="form-group">
-                <label className="form-label">Your Name</label>
+                <label className="form-label">Your Name *</label>
                 <input 
                   type="text" 
                   className="form-input"
@@ -122,8 +150,32 @@ export default function ContactView({ onOpenBooking }) {
                 />
               </div>
 
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div className="form-group">
+                  <label className="form-label">Company / Brand</label>
+                  <input 
+                    type="text" 
+                    className="form-input"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    placeholder="Acme Corp"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Phone / WhatsApp</label>
+                  <input 
+                    type="tel" 
+                    className="form-input"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+              </div>
+
               <div className="form-group">
-                <label className="form-label">Email Address</label>
+                <label className="form-label">Email Address *</label>
                 <input 
                   type="email" 
                   className="form-input"
@@ -135,7 +187,7 @@ export default function ContactView({ onOpenBooking }) {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Message / Goal</label>
+                <label className="form-label">Content Goals & Challenges *</label>
                 <textarea 
                   className="form-textarea"
                   rows="4"

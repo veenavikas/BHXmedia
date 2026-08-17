@@ -7,6 +7,7 @@ export const SITE_CONTENT = {
     owner: "Bharath C.S.",
     email: "bharath@bhxmedia.com",
     linkedin: "https://www.linkedin.com/in/bharathcs",
+    calendlyUrl: "https://calendly.com/bharath-bhxmedia/30min",
     primaryCta: "Book a 30-minute content audit"
   },
   

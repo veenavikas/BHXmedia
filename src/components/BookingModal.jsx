@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { SITE_CONTENT } from '../data/siteContent';
 
 export default function BookingModal({ isOpen, onClose }) {
   useEffect(() => {
@@ -12,6 +13,11 @@ export default function BookingModal({ isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+
+  const rawUrl = SITE_CONTENT.brand.calendlyUrl || 'https://calendly.com';
+  const calendlyEmbedUrl = rawUrl.includes('?') 
+    ? `${rawUrl}&hide_gdpr_banner=1&primary_color=c0362c` 
+    : `${rawUrl}?hide_gdpr_banner=1&primary_color=c0362c`;
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
@@ -40,10 +46,10 @@ export default function BookingModal({ isOpen, onClose }) {
           Select a time for a 30-minute diagnosis of your current content engine. We will identify where content leaks money and deliver a clear action plan.
         </p>
 
-        {/* Embedded Cal.com / Calendly Widget Frame */}
-        <div style={{ border: '1px solid var(--hairline)', borderRadius: '2px', overflow: 'hidden', height: '480px', background: '#FFFFFF' }}>
+        {/* Embedded Calendly Widget Frame */}
+        <div style={{ border: '1px solid var(--hairline)', borderRadius: '2px', overflow: 'hidden', height: '520px', background: '#FFFFFF' }}>
           <iframe 
-            src="https://cal.com/embed/bhxmedia/30min" 
+            src={calendlyEmbedUrl} 
             title="Book a 30-minute content audit with Bharath C.S."
             style={{ width: '100%', height: '100%', border: 'none' }}
             onError={(e) => {
@@ -61,7 +67,16 @@ export default function BookingModal({ isOpen, onClose }) {
           </div>
         </div>
 
-        <div style={{ marginTop: '20px', textAlign: 'right' }}>
+        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <a 
+            href={calendlyEmbedUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="mono" 
+            style={{ fontSize: '11px', color: 'var(--grey)', textDecoration: 'underline' }}
+          >
+            Open Calendly in new tab ↗
+          </a>
           <span className="mono" style={{ fontSize: '11px' }}>Direct contact: bharath@bhxmedia.com</span>
         </div>
 
