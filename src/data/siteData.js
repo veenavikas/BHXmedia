@@ -1,368 +1,274 @@
-// High-Concept Independent Creative Agency & Commercial Video Studio Data for BHX Media
+// Source of Truth Data for BHX Media & Bharath C.S.
+// Aligned with Google Doc & Claude Artifact bhxmedia_site_v3
 
-export const PORTFOLIO_ITEMS = [
-  {
-    id: 1,
-    title: "Netflix Series Launch — 'Chasing Shadows' Campaign",
-    category: "Series Promos",
-    format: "16:9",
-    client: "Netflix Original Series",
-    views: "18.4M",
-    duration: "02:15",
-    tags: ["On-Location Cinema", "RED 8K RAW", "Sound Design", "National TV Cut"],
-    thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1000&q=80",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    summary: "Turnkey promotional shoot and campaign launch for Netflix series. Conceived, scripted, and shot on location in Berlin with full cinema crew, aerial tracking drones, and Dolby Atmos audio mix.",
-    results: ["#1 Trending Trailer Worldwide", "18.4M Organic Views", "Global Social Takeover"],
-    deliverables: ["2-Min Hero Trailer", "4x TV Commercial Cuts", "15x Vertical Teaser Reels"]
+export const SITE_DATA = {
+  brand: {
+    name: "BHX Media",
+    tagline: "Content that earns its keep.",
+    owner: "Bharath C.S.",
+    title: "Content Business Specialist",
+    experience: "30 years",
+    email: "bharath@bhxmedia.com",
+    linkedin: "https://www.linkedin.com/in/bharathcs",
+    calendlyUrl: "https://calendly.com/bharath-bhxmedia/30min"
   },
-  {
-    id: 2,
-    title: "CyberForge — Global Launch Commercial",
-    category: "Brand Campaigns",
-    format: "9:16",
-    client: "CyberForge Audio",
-    views: "12.4M",
-    duration: "0:45",
-    tags: ["TV Commercial", "Kinetic VFX", "Sound Design"],
-    thumbnail: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1000&q=80",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    summary: "High-octane commercial campaign conceiving a futuristic audio product launch. Filmed in studio with custom lighting rigs and high-retention social cuts.",
-    results: ["12.4M Total Impressions", "42K Direct Orders", "3.2x ROI on Campaign Spend"],
-    deliverables: ["Hero Commercial", "10x Vertical Ad Cuts", "Custom Soundtrack"]
-  },
-  {
-    id: 3,
-    title: "Alex Riviera — Founder Original Series",
-    category: "Original Vlogs",
-    format: "16:9",
-    client: "Alex Riviera (1.2M Subs)",
-    views: "4.8M",
-    duration: "14:20",
-    tags: ["Original Series", "DaVinci Color Pass", "Retention Direction"],
-    thumbnail: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1000&q=80",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    summary: "Full showrunner creative direction for Alex Riviera's flagship documentary series. We directed narrative structure, multi-cam B-roll shoots, and executive post-production.",
-    results: ["+140% Retention Increase", "2.1M Organic Views/Ep", "#4 Trending in Tech"],
-    deliverables: ["8x Documentary Episodes", "32x Short Clips", "Custom Thumbnail Concepts"]
-  },
-  {
-    id: 4,
-    title: "The Unfiltered Broadcast — Studio Podcast",
-    category: "Podcasts",
-    format: "16:9",
-    client: "Unfiltered Media Group",
-    views: "850K",
-    duration: "48:10",
-    tags: ["Multi-cam Studio", "Audio Mastering", "Social Engine"],
-    thumbnail: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1000&q=80",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
-    summary: "Full studio broadcast setup with live camera switching, 32-bit float audio mastering, and automated viral clip extraction for social platforms.",
-    results: ["Top 5 Apple Podcasts", "850K YouTube Plays", "98.4% Audio Clarity Rating"],
-    deliverables: ["Full Video Broadcast", "Mastered Audio Stems", "12 Shorts Clips"]
-  },
-  {
-    id: 5,
-    title: "Hyperion Energy — Commercial Brand Film",
-    category: "Brand Campaigns",
-    format: "16:9",
-    client: "Hyperion Energy",
-    views: "2.1M",
-    duration: "1:30",
-    tags: ["Cinematic Commercial", "FPV Drone", "VFX"],
-    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-    summary: "Commercial anthem filmed on location across 3 states in RED 8K cinema format. Featured FPV aerial drone tracking and original score.",
-    results: ["Broadcast on National TV", "+85% Brand Awareness", "Gold Video Award 2025"],
-    deliverables: ["90s Hero Brand Film", "30s TV Cut", "15s Social Cutdowns"]
-  },
-  {
-    id: 6,
-    title: "Maya Lin — 30-Day Launch Campaign",
-    category: "Series Promos",
-    format: "9:16",
-    client: "Maya Lin Lifestyle",
-    views: "8.9M",
-    duration: "0:30",
-    tags: ["Series Teasers", "Retention Hacks", "Dynamic Captions"],
-    thumbnail: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    summary: "High-volume teaser campaign for app launch. We directed talent, shot high-energy footage, and produced 30 vertical teaser trailers.",
-    results: ["+180K Followers Added", "8.9M Combined Views", "14% App Conversion"],
-    deliverables: ["30 Daily Teasers", "Animated Text Callouts", "Custom Sound Effects"]
-  }
-];
 
-export const SERVICES_DATA = [
-  {
-    id: "commercial-tv",
-    code: "01",
-    title: "Commercial & TV Ad Campaigns",
-    subtitle: "High-concept ad campaigns conceived, scripted, and shot on location for brands & streaming platforms.",
-    price: "Custom Project Basis",
-    turnaround: "Turnaround SLA Guaranteed",
-    iconName: "Camera",
-    description: "Like a high-end TV ad agency, we conceive creative campaign concepts, write scripts, direct on-location cinema shoots with full crew, and deliver national TV & digital commercial cuts.",
-    features: [
-      "Creative Concepting & Scriptwriting",
-      "Director, DP & Cinema Crew (RED/Sony FX)",
-      "Location Scouting, Permits & Casting",
-      "Full Post-Production (Color, VFX, Sound)",
-      "National TV & Multi-Platform Licensing"
-    ]
-  },
-  {
-    id: "series-promos",
-    code: "02",
-    title: "Brand Promo & Series Launches",
-    subtitle: "Turnkey promotional shoots and teasers for show launches, product reveals, and streaming series.",
-    price: "From $4,999/launch",
-    turnaround: "Rush Delivery Option",
-    iconName: "Sparkles",
-    description: "Imagine Netflix hiring a creative agency to launch a new series. We shoot promotional teasers, cast talent, produce main trailers, and create viral social campaigns.",
-    features: [
-      "Series Launch Strategy & Storyboards",
-      "On-Location Teaser & Trailer Shoots",
-      "Kinetic Motion Graphics & VFX",
-      "Vertical Teasers for TikTok/IG/Shorts",
-      "Dolby Atmos / Spatial Audio Mix"
-    ]
-  },
-  {
-    id: "creator-series",
-    code: "03",
-    title: "Creator Original Series & Vlogging",
-    subtitle: "Showrunner creative direction and post-production for high-retention creator series & vlogs.",
-    price: "From $1,999/ep",
-    turnaround: "3–4 Business Days",
-    iconName: "Video",
-    description: "We work as your creative showrunner — structuring narrative pacing, managing multi-cam B-roll, color grading, and engineering retention hooks that hold audiences for 15+ minutes.",
-    features: [
-      "Narrative Pacing & Retention Editing",
-      "DaVinci Resolve Studio Color Pass",
-      "Custom Foley Sound Design & Audio",
-      "High-CTR Thumbnail Concepts",
-      "Channel Analytics Review"
-    ]
-  },
-  {
-    id: "social-engines",
-    code: "04",
-    title: "Viral Social Content Engines",
-    subtitle: "High-volume short-form campaigns designed to dominate TikTok, Reels, and YouTube Shorts feeds.",
-    price: "From $2,499/mo",
-    turnaround: "24–48 Hours",
-    iconName: "Smartphone",
-    description: "High-volume content pipelines for brands & creators. We write hooks, direct talent, edit kinetic subtitles, and deliver ready-to-publish short-form videos.",
-    features: [
-      "Hook Concepting & A/B Testing",
-      "Kinetic Typography & Sound Triggers",
-      "Format Optimization (9:16 & 4:5)",
-      "Batch Monthly Content Delivery",
-      "Growth Metric Tracking"
-    ]
-  },
-  {
-    id: "podcast-broadcast",
-    code: "05",
-    title: "Video Podcast & Broadcast Studio",
-    subtitle: "Multi-camera studio video podcasts with broadcast audio mastering and automated clip extraction.",
-    price: "From $1,299/ep",
-    turnaround: "2–3 Days",
-    iconName: "Mic",
-    description: "Transform studio sessions into a polished broadcast production with automated camera switching, noise mastering, and social highlight extraction.",
-    features: [
-      "Multi-Camera Angle Switching",
-      "Studio 32-Bit Audio Mastering",
-      "Animated Lower Thirds & Guest Cards",
-      "5x Short Clips Included per Episode",
-      "Audio RSS Feed Formatting"
-    ]
-  },
-  {
-    id: "executive-post",
-    code: "06",
-    title: "Executive Post-Production & VFX",
-    subtitle: "Hollywood-grade color grading, Pro Tools audio spatial sweetening, and 2D/3D motion graphics.",
-    price: "From $999/project",
-    turnaround: "2–5 Days",
-    iconName: "Sliders",
-    description: "Give your existing video footage a cinema finish with professional DaVinci Resolve color passes, custom 3D animations, and licensed score composition.",
-    features: [
-      "DaVinci Resolve Studio Color Pass",
-      "Pro Tools Audio Clean-Up & Mastering",
-      "Custom 2D/3D Logo & Title Animations",
-      "Subtitling in 12+ Languages",
-      "RAW Archival & Project Handoff"
-    ]
-  }
-];
-
-export const PROCESS_STEPS = [
-  {
-    number: "01",
-    title: "Concept & Briefing",
-    description: "We align on your campaign goals, target audience, script outline, and visual direction.",
-    icon: "UploadCloud"
-  },
-  {
-    number: "02",
-    title: "Shoot & Production",
-    description: "Our cinema DP crew shoots on location or in-studio with RED 8K cameras, lighting, and sound gear.",
-    icon: "Wand2"
-  },
-  {
-    number: "03",
-    title: "Executive Post-Production",
-    description: "Our story editors, colorists, and VFX artists turn raw footage into high-retention cutdowns.",
-    icon: "CheckCircle2"
-  },
-  {
-    number: "04",
-    title: "Multi-Platform Campaign Launch",
-    description: "Receive your final rendered masters optimized for TV broadcast, YouTube, TikTok, and web.",
-    icon: "Rocket"
-  }
-];
-
-export const STATS_DATA = [
-  { value: "150+", label: "Brand & Creator Campaigns", suffix: "" },
-  { value: "50M", label: "Organic Views Generated", suffix: "+" },
-  { value: "4.9", label: "Client Star Rating", suffix: "/5" },
-  { value: "1.2K", label: "Video Assets Delivered in 2025", suffix: "+" }
-];
-
-export const TESTIMONIALS = [
-  {
-    id: 1,
-    name: "Alex Riviera",
-    role: "Tech Founder & Creator",
-    handle: "@alextechvlogs",
-    followers: "1.2M Subscribers",
-    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    quote: "BHX Media operates like a top-tier creative house. They don't just edit — they direct narrative pacing and retention hooks that doubled my watch time.",
-    rating: 5,
-    result: "+140% Retention Increase"
-  },
-  {
-    id: 2,
-    name: "Sarah Chen",
-    role: "CMO at CyberForge",
-    handle: "@cyberforge",
-    followers: "Brand Account",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
-    quote: "Working with BHX felt like hiring a TV ad agency. They conceived our launch commercial, shot it on RED 8K cameras, and delivered 10 viral reels.",
-    rating: 5,
-    result: "12.4M Campaign Views"
-  },
-  {
-    id: 3,
-    name: "Marcus Vance",
-    role: "Podcast Host & Executive",
-    handle: "@unfilteredshow",
-    followers: "850K Subscribers",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-    quote: "BHX handles everything from studio multi-cam production to extracting viral shorts. They turned our show into a complete content engine.",
-    rating: 5,
-    result: "Top 5 Tech Podcast"
-  }
-];
-
-export const PRICING_TIERS = [
-  {
-    id: "starter",
-    name: "Series & Creator Retainer",
-    tagline: "Ideal for active creators & brands producing regular video series & vlogs.",
-    monthlyPrice: 2499,
-    oneTimePrice: 2999,
-    popular: false,
-    features: [
-      "4x Long-Form Vlogs / Series Episodes",
-      "12x Shorts / Reels extracted & edited",
-      "Story-driven pacing & sound design",
-      "Color grading & light motion graphics",
-      "2 Rounds of Revisions per asset",
-      "Dedicated Slack channel support"
+  hero: {
+    eyebrow: "Content company · Bharath C.S.",
+    headline: "Content that earns its keep.",
+    lede: "Brand films, influencer campaigns, performance content, employer branding, and micro-drama. Run by a content operator with 30 years at scale: Amazon India, Kuku TV, Culture Machine.",
+    showreel: {
+      type: "youtube",
+      id: "REPLACE_SHOWREEL_ID",
+      title: "BHX Showreel",
+      client: "Selected work, 2024",
+      tc: "REEL 00:00 / 02:30"
+    },
+    stats: [
+      { value: "500+", label: "Films & TVCs" },
+      { value: "50,000+", label: "Assets shipped" },
+      { value: "58+", label: "Shows, 4 languages" }
     ],
-    cta: "Start Creator Retainer"
+    trustCompanies: [
+      "Amazon India",
+      "Kuku TV",
+      "Culture Machine",
+      "Microsoft",
+      "Lonza",
+      "GMR",
+      "Sun TV Network",
+      "Nokia",
+      "OnePlus"
+    ]
   },
-  {
-    id: "growth",
-    name: "Full Campaign Engine",
-    tagline: "Our flagship package for brand launches, commercial promos & scaling channels.",
-    monthlyPrice: 4899,
-    oneTimePrice: 5499,
-    popular: true,
-    features: [
-      "8x Long-Form Series Episodes / Broadcasts",
-      "25x High-Retention Teaser Reels / Shorts",
-      "Custom Creative Direction & Shot Lists",
-      "Advanced 2D/3D Motion Graphics & Captions",
-      "Unlimited Revisions",
-      "Dedicated Lead Producer & Director",
-      "Monthly Retention Analytics Call"
-    ],
-    cta: "Start Campaign Engine"
-  },
-  {
-    id: "custom",
-    name: "Commercial & Cinema Shoot",
-    tagline: "Full-scale on-location cinema shoots (like TV ads & Netflix promo launches).",
-    monthlyPrice: "Custom",
-    oneTimePrice: "Custom",
-    popular: false,
-    features: [
-      "On-Location Cinema Camera Crew (RED/Sony FX)",
-      "Director, DP, Lighting, Audio & Drone Ops",
-      "Location Scouting, Permits & Casting",
-      "National TV & Digital Ad Cuts",
-      "Original Music Score & Dolby Atmos Mix",
-      "RAW File Handoff & Project Backups"
-    ],
-    cta: "Book Campaign Consultation"
-  }
-];
 
-export const FAQS = [
-  {
-    q: "Are you a video editing service or a full creative agency?",
-    a: "BHX Media is a full-service Independent Creative Agency & Commercial Video Studio. We conceive campaign concepts, write scripts, direct on-location cinema shoots (using RED/Sony cameras), and manage complete post-production for brands, creators, and entertainment platforms."
+  output: {
+    eyebrow: "The output",
+    headline: "Faster, better cost, higher quality. You get all three.",
+    tiles: [
+      {
+        id: "speed",
+        title: "Speed",
+        desc: "The right specialist starts producing on day one. No ramp-up, no learning your category on your clock.",
+        icon: "speed"
+      },
+      {
+        id: "cost",
+        title: "Better cost",
+        desc: "You pay for a fit, not for a team figuring it out. Right talent, right scope, less waste.",
+        icon: "cost"
+      },
+      {
+        id: "quality",
+        title: "Quality",
+        desc: "A specialist who has done exactly this before sets a higher bar than any generalist can reach.",
+        icon: "quality"
+      }
+    ]
   },
-  {
-    q: "What if Netflix or a major brand hires BHX Media for a promo launch?",
-    a: "That's exactly our wheelhouse! For series launches or product reveals, we handle creative direction, shoot promotional teasers on location with full crew, edit high-retention trailers, and produce multi-platform commercial assets."
-  },
-  {
-    q: "How does the raw footage or shoot planning work?",
-    a: "For remote editing, you upload raw footage into your dedicated BHX Cloud Portal. For on-location shoots, our creative director and DP crew travel to your location with cinema cameras, lighting, and sound gear."
-  },
-  {
-    q: "What is your typical turnaround time for deliverables?",
-    a: "Shorts and Reels teasers are delivered within 24–48 hours. Long-form episodes and commercial edits take 3 to 4 business days. Express 24-hour SLA turnaround is available for urgent launches."
-  },
-  {
-    q: "Do we own all rights to final commercial assets?",
-    a: "Yes! You own 100% of the commercial rights to all final rendered videos, project files, and graphics. All music used is licensed for worldwide broadcast monetization."
-  }
-];
 
-export const TEAM_MEMBERS = [
-  {
-    name: "Brandon Vance",
-    role: "Founder & Creative Director",
-    bio: "Ex-YouTube Creator lead & commercial director with 8+ years producing content with over 200M combined views.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+  services: {
+    eyebrow: "What I do",
+    headline: "One partner for the whole content stack.",
+    subtitle: "Most brands stitch together a film studio, a performance agency, and a creator shop. I cover the range, and I decide what is actually worth making before a rupee is spent.",
+    items: [
+      {
+        num: "01",
+        title: "Brand films & video",
+        desc: "Ad films, brand stories, and product films that hold attention and sell.",
+        proof: "Directed for Microsoft, Lonza, GMR. Built Amazon India's in-house studio."
+      },
+      {
+        num: "02",
+        title: "Influencer & creator marketing",
+        desc: "Creator strategy, sourcing, briefs, and full campaign management, matched to the outcome you want.",
+        proof: "Runs an 80,000-subscriber channel, so I read creators from both sides."
+      },
+      {
+        num: "03",
+        title: "Performance content",
+        desc: "Content built to convert across D2C, e-commerce, and paid, not just to look good.",
+        proof: "Ran performance and marketplace content, including GI-tagged handicrafts."
+      },
+      {
+        num: "04",
+        title: "Micro-drama & short-form",
+        desc: "Vertical micro-drama and serialized short-form, from script to slate, end to end.",
+        proof: "Scaled Kuku TV from 15 to 58+ shows across four South Indian languages."
+      },
+      {
+        num: "05",
+        title: "Employer branding",
+        desc: "Recruitment films, culture content, and EVP that actually helps you hire.",
+        proof: "Head of Content, APAC for Amazon India's employer brand."
+      },
+      {
+        num: "06",
+        title: "Content strategy & positioning",
+        desc: "What to make, for whom, and why it will sell. Editorial systems and content-to-sales mapping.",
+        proof: "Content read as a product with unit economics, not just creative."
+      },
+      {
+        num: "07",
+        title: "Content at scale & studio setup",
+        desc: "In-house content engines, systems, and automation for brand teams and GCCs launching in India.",
+        proof: "Delivered 50,000+ assets. Built the tooling to run content industrially."
+      },
+      {
+        num: "+",
+        title: "Not sure which you need?",
+        desc: "Tell me the problem. I will tell you what is worth making and what to skip.",
+        proof: "Book a 30-minute call to scope your exact needs."
+      }
+    ]
   },
-  {
-    name: "Helena Rostova",
-    role: "Head of Post-Production",
-    bio: "Senior DaVinci Resolve colorist and story editor. Specializes in long-form retention pacing.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
+
+  approach: {
+    eyebrow: "How I work",
+    headline: "AI made content cheap. Judgment makes it count.",
+    lead: "Your team and AI can produce endless volume. That was never the hard part. The hard part is knowing what to make, whether it is good, and whether it will sell. That is what I own.",
+    steps: [
+      {
+        no: "01",
+        title: "Scope",
+        desc: "Decide what is worth making. Most content should never exist. Kill the noise before it costs you."
+      },
+      {
+        no: "02",
+        title: "Select",
+        desc: "Gate the quality. AI will generate a hundred versions. Only work good enough to convert goes out."
+      },
+      {
+        no: "03",
+        title: "Ship",
+        desc: "Produce and place it to drive real results, not just reach. Content that earns its cost back."
+      }
+    ]
   },
-  {
-    name: "Marcus Thorne",
-    role: "Lead DP & Cinema Director",
-    bio: "Commercial director for RED digital cameras. Directed over 50+ brand campaigns & TV spots.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"
+
+  about: {
+    eyebrow: "Why BHX",
+    quote: "Anyone can make content now. The rare skill is knowing what is worth making, and whether it is good enough to ship.",
+    cite: "Bharath C.S. · Founder, BHX Media",
+    proofList: [
+      {
+        title: "Scale & systems",
+        desc: "6.5 years in Amazon India's marketing division. Built the in-house production studio, delivered 500+ TVCs and 50,000+ assets, and built automation to run content at industrial scale."
+      },
+      {
+        title: "Audience judgment",
+        desc: "Content Director at Kuku TV, scaling the micro-drama slate from 15 to 58+ shows across four languages. South Content Lead at Culture Machine, across Sun TV Network, radio, and OTT."
+      },
+      {
+        title: "Content to sales",
+        desc: "Ran performance campaigns and D2C and e-commerce content, including GI-tagged Indian handicrafts. Comfortable across the full path: brand, production, distribution, and performance."
+      },
+      {
+        title: "India & regional depth",
+        desc: "Deep work in South Indian languages and hyperlocal audiences. Runs a Telugu content channel with roughly 80,000 subscribers."
+      }
+    ],
+    numbers: [
+      { value: "30 yrs", label: "In content" },
+      { value: "500+", label: "Films & TVCs" },
+      { value: "50k+", label: "Assets" },
+      { value: "58+", label: "Shows" },
+      { value: "4", label: "Languages" },
+      { value: "80k", label: "Subscribers" }
+    ]
+  },
+
+  who: {
+    eyebrow: "Who I work with",
+    headline: "If it can be built with content, I can help.",
+    cards: [
+      {
+        tag: "Brands & product owners",
+        title: "Content that performs",
+        desc: "Brand films, positioning and performance content that drives real results."
+      },
+      {
+        tag: "Marketing teams & GCCs",
+        title: "Scale, done right",
+        desc: "A senior partner to raise the bar and set up content, including new work in India."
+      },
+      {
+        tag: "Studios & platforms",
+        title: "Micro-drama & TV",
+        desc: "Slate strategy and production from someone who has scaled shows at volume."
+      },
+      {
+        tag: "Founders building at scale",
+        title: "Content as an engine",
+        desc: "Stand up a content machine that grows a new business fast."
+      }
+    ]
+  },
+
+  rates: {
+    eyebrow: "How to work with me",
+    headline: "Start with a free call. If it's a fit, here's how engagements work.",
+    subtitle: "No long pitch. We talk, and if I can help, we pick the right way to work together.",
+    tiers: [
+      {
+        id: "intro",
+        title: "Intro call",
+        price: "Free",
+        priceUnit: "· 30 min",
+        desc: "A straight conversation about your goals and whether I'm the right person to help.",
+        featured: true,
+        cta: "Book a call →"
+      },
+      {
+        id: "strategy",
+        title: "Content strategy",
+        price: "From ₹75,000",
+        desc: "A focused engagement to set your content direction and give you a clear plan to act on.",
+        featured: false
+      },
+      {
+        id: "fractional",
+        title: "Fractional content lead",
+        price: "From ₹1,50,000",
+        perMonth: "per month",
+        desc: "Ongoing senior guidance and oversight, so your team ships better content, consistently.",
+        featured: false
+      },
+      {
+        id: "production",
+        title: "Production project",
+        price: "On quote",
+        desc: "Concept to finished film or slate, priced per project once we've scoped what you need.",
+        featured: false
+      }
+    ],
+    note: "Indicative pricing. Final rates depend on scope."
+  },
+
+  faq: {
+    eyebrow: "Questions",
+    headline: "Common questions.",
+    items: [
+      {
+        q: "Who is Bharath C.S.?",
+        a: "A Content Business Specialist with 30 years of experience building content and brand films for major companies including Amazon, Microsoft, Nokia and OnePlus. Through BHX Media he brings a network of top 1% specialists to each project."
+      },
+      {
+        q: "What does BHX Media do?",
+        a: "Content strategy and positioning, brand films, performance marketing, employer branding, micro-drama and TV, and content built to scale a business. Bharath brings the right specialist for each job, rather than forcing one team to do everything."
+      },
+      {
+        q: "Can BHX Media help me scale my content?",
+        a: "Yes. BHX Media sets up content engines and matches the right specialist to each task, so quality stays high as volume grows. This suits brands, startups and teams that need to produce more without losing quality."
+      },
+      {
+        q: "Do you use AI to produce content?",
+        a: "Yes, where it helps: concept and hook testing, dubbing, localization and visual genres. Human specialists handle emotional and craft-led work, where they set a higher bar than AI can reach."
+      },
+      {
+        q: "How do I start working with Bharath?",
+        a: "Book a free 30-minute call to talk through your goals and whether he is the right person to help."
+      }
+    ]
   }
-];
+};

@@ -1,83 +1,82 @@
 import React, { useEffect } from 'react';
-import { SITE_CONTENT } from '../data/siteContent';
+import { SITE_DATA } from '../data/siteData';
 
 export default function BookingModal({ isOpen, onClose }) {
+  const { brand } = SITE_DATA;
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
     };
     if (isOpen) {
       window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const rawUrl = SITE_CONTENT.brand.calendlyUrl || 'https://calendly.com';
+  const rawUrl = brand.calendlyUrl || 'https://calendly.com';
   const calendlyEmbedUrl = rawUrl.includes('?') 
-    ? `${rawUrl}&hide_gdpr_banner=1&primary_color=c0362c` 
-    : `${rawUrl}?hide_gdpr_banner=1&primary_color=c0362c`;
+    ? `${rawUrl}&hide_gdpr_banner=1&primary_color=c9a24e` 
+    : `${rawUrl}?hide_gdpr_banner=1&primary_color=c9a24e`;
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-box" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '800px', padding: '32px' }}>
+    <div className="modal open" style={{ zIndex: 110 }} onClick={(e) => { if (e.target.classList.contains('modal')) onClose(); }}>
+      <div className="modal-box" style={{ maxWidth: '800px', background: 'var(--paper)', borderRadius: '16px', padding: '32px', color: 'var(--ink)', border: '1px solid var(--hair)' }}>
         
         {/* Modal Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', borderBottom: '1px solid var(--hairline)', paddingBottom: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', borderBottom: '1px solid var(--hair)', paddingBottom: '16px' }}>
           <div>
-            <span className="mono" style={{ color: 'var(--red)' }}>DIRECT BOOKING</span>
-            <h2 className="section-title" style={{ fontSize: '24px' }}>
-              Book a 30-minute content audit<span className="stop">.</span>
+            <span className="lab gold">Direct Booking</span>
+            <h2 className="serif" style={{ fontSize: '26px', marginTop: '6px', fontWeight: 600 }}>
+              Book a free 30-minute call
             </h2>
           </div>
 
           <button 
             onClick={onClose}
-            className="btn btn-ghost"
-            style={{ fontSize: '11px', padding: '6px 12px' }}
+            style={{ background: 'transparent', border: 'none', fontSize: '28px', color: 'var(--ink)', cursor: 'pointer', lineHeight: 1 }}
             aria-label="Close booking modal"
           >
-            ✕ CLOSE
+            &times;
           </button>
         </div>
 
-        <p className="body-text" style={{ fontSize: '15px', color: 'var(--grey)', marginBottom: '24px' }}>
-          Select a time for a 30-minute diagnosis of your current content engine. We will identify where content leaks money and deliver a clear action plan.
+        <p style={{ fontSize: '15.5px', color: 'var(--grey)', marginBottom: '24px' }}>
+          Talk through your goals and whether Bharath C.S. is the right person to help. No pitch, just a straight conversation about your business.
         </p>
 
-        {/* Embedded Calendly Widget Frame */}
-        <div style={{ border: '1px solid var(--hairline)', borderRadius: '2px', overflow: 'hidden', height: '520px', background: '#FFFFFF' }}>
+        {/* Embedded Calendly / Contact Container */}
+        <div style={{ border: '1px solid var(--hair)', borderRadius: '12px', overflow: 'hidden', height: '480px', background: '#FFFFFF', position: 'relative' }}>
           <iframe 
             src={calendlyEmbedUrl} 
-            title="Book a 30-minute content audit with Bharath C.S."
+            title="Book a call with Bharath C.S."
             style={{ width: '100%', height: '100%', border: 'none' }}
-            onError={(e) => {
-              // Fallback placeholder if embed fails in local test
-              e.target.style.display = 'none';
-            }}
           />
-          <div style={{ padding: '24px', textAlign: 'center', color: 'var(--grey)' }} className="iframe-fallback">
-            <p className="body-text" style={{ marginBottom: '16px' }}>
-              Prefer to book directly or send a message?
-            </p>
-            <a href="mailto:bharath@bhxmedia.com" className="btn btn-primary">
-              Email bharath@bhxmedia.com
-            </a>
-          </div>
         </div>
 
-        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
+          <a 
+            href={`mailto:${brand.email}?subject=Booking%20a%20call`}
+            className="btn btn-gold" 
+            style={{ padding: '10px 20px', fontSize: '14px' }}
+          >
+            Or Email {brand.email} &rarr;
+          </a>
           <a 
             href={calendlyEmbedUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="mono" 
-            style={{ fontSize: '11px', color: 'var(--grey)', textDecoration: 'underline' }}
+            className="lab" 
+            style={{ color: 'var(--grey)', textDecoration: 'underline' }}
           >
-            Open Calendly in new tab ↗
+            Open in new tab ↗
           </a>
-          <span className="mono" style={{ fontSize: '11px' }}>Direct contact: bharath@bhxmedia.com</span>
         </div>
 
       </div>
