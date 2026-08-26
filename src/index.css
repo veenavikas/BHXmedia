@@ -1126,3 +1126,50 @@ footer.ft {
     transition: none;
   }
 }
+
+/* WHATSAPP FLOATING BUTTON */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 10px 18px 10px 12px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.38);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .25s cubic-bezier(.2, .7, .2, 1), box-shadow .25s ease;
+}
+
+.wa-float:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
+  color: #FFFFFF;
+}
+
+.wa-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .wa-float {
+    bottom: 18px;
+    right: 18px;
+    padding: 12px;
+    border-radius: 50%;
+  }
+  .wa-text {
+    display: none;
+  }
+}
+

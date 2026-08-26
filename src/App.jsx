@@ -12,9 +12,10 @@ import FinalSection from './components/FinalSection';
 import Footer from './components/Footer';
 import VideoModal from './components/VideoModal';
 import BookingModal from './components/BookingModal';
+import WhatsAppButton from './components/WhatsAppButton';
 
 export default function App() {
-  const [activeVideoId, setActiveVideoId] = useState(null);
+  const [activeVideo, setActiveVideo] = useState(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   useEffect(() => {
@@ -46,14 +47,15 @@ export default function App() {
       <Services />
       <ModelSection />
       <WhoSection />
-      <WorkSection onOpenVideo={(id) => setActiveVideoId(id)} />
+      <WorkSection onOpenVideo={(videoObj) => setActiveVideo(videoObj)} />
       <RatesSection onOpenBooking={() => setIsBookingOpen(true)} />
       <FAQSection />
       <FinalSection onOpenBooking={() => setIsBookingOpen(true)} />
       <Footer />
 
-      <VideoModal videoId={activeVideoId} onClose={() => setActiveVideoId(null)} />
+      <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      <WhatsAppButton />
     </div>
   );
 }
