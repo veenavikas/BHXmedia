@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer({ onNavigateMeet }) {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -11,16 +11,9 @@ export default function Footer({ onNavigateMeet }) {
           <span className="media">Media</span>
         </a>
         <span className="l">Bharath C.S. · Content Business Specialist</span>
-        <a 
-          href="/meet" 
-          className="l" 
-          style={{ textDecoration: 'underline', color: 'inherit' }}
-          onClick={(e) => { e.preventDefault(); if (onNavigateMeet) onNavigateMeet(); else window.location.href = '/meet'; }}
-        >
-          Google Meet Link Page
-        </a>
         <span className="l">© {currentYear} BHX Media</span>
       </div>
     </footer>
   );
 }
+

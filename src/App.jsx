@@ -80,7 +80,7 @@ export default function App() {
 
   return (
     <div>
-      <Navbar onOpenBooking={() => setIsBookingOpen(true)} onNavigateMeet={navigateToMeet} />
+      <Navbar onOpenBooking={() => setIsBookingOpen(true)} />
       <Hero onOpenBooking={() => setIsBookingOpen(true)} />
       <OutputSection />
       <Services />
@@ -90,7 +90,7 @@ export default function App() {
       <RatesSection onOpenBooking={() => setIsBookingOpen(true)} />
       <FAQSection />
       <FinalSection onOpenBooking={() => setIsBookingOpen(true)} />
-      <Footer onNavigateMeet={navigateToMeet} />
+      <Footer />
 
       <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
@@ -98,4 +98,5 @@ export default function App() {
     </div>
   );
 }
+
 
