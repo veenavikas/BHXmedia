@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Navbar({ onOpenBooking }) {
+export default function Navbar({ onOpenBooking, onNavigateMeet }) {
   return (
     <header className="nav">
       <div className="wrap nav-inner">
@@ -12,6 +12,7 @@ export default function Navbar({ onOpenBooking }) {
           <a className="lnk" href="#work">Work</a>
           <a className="lnk" href="#services">Services</a>
           <a className="lnk" href="#model">How I work</a>
+          <a className="lnk" href="/meet" onClick={(e) => { e.preventDefault(); if (onNavigateMeet) onNavigateMeet(); else window.location.href = '/meet'; }}>Google Meet</a>
           <button className="btn btn-gold nav-cta" onClick={onOpenBooking}>
             Book a call
           </button>
@@ -20,3 +21,4 @@ export default function Navbar({ onOpenBooking }) {
     </header>
   );
 }
+

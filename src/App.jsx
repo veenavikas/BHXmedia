@@ -13,13 +13,38 @@ import Footer from './components/Footer';
 import VideoModal from './components/VideoModal';
 import BookingModal from './components/BookingModal';
 import WhatsAppButton from './components/WhatsAppButton';
+import MeetPage from './components/MeetPage';
 
 export default function App() {
   const [activeVideo, setActiveVideo] = useState(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [currentView, setCurrentView] = useState(() => {
+    const p = window.location.pathname.toLowerCase();
+    const h = window.location.hash.toLowerCase();
+    return p === '/meet' || p === '/meet/' || h === '#meet' ? 'meet' : 'home';
+  });
 
   useEffect(() => {
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const handleLocationChange = () => {
+      const p = window.location.pathname.toLowerCase();
+      const h = window.location.hash.toLowerCase();
+      if (p === '/meet' || p === '/meet/' || h === '#meet') {
+        setCurrentView('meet');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentView === 'home' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((en) => {
@@ -34,14 +59,28 @@ export default function App() {
 
       document.querySelectorAll('.rv').forEach((el) => io.observe(el));
       return () => io.disconnect();
-    } else {
-      document.querySelectorAll('.rv').forEach((el) => el.classList.add('in'));
     }
-  }, []);
+  }, [currentView]);
+
+  const navigateToHome = () => {
+    window.history.pushState({}, '', '/');
+    setCurrentView('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToMeet = () => {
+    window.history.pushState({}, '', '/meet');
+    setCurrentView('meet');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (currentView === 'meet') {
+    return <MeetPage onBackToHome={navigateToHome} />;
+  }
 
   return (
     <div>
-      <Navbar onOpenBooking={() => setIsBookingOpen(true)} />
+      <Navbar onOpenBooking={() => setIsBookingOpen(true)} onNavigateMeet={navigateToMeet} />
       <Hero onOpenBooking={() => setIsBookingOpen(true)} />
       <OutputSection />
       <Services />
@@ -51,7 +90,7 @@ export default function App() {
       <RatesSection onOpenBooking={() => setIsBookingOpen(true)} />
       <FAQSection />
       <FinalSection onOpenBooking={() => setIsBookingOpen(true)} />
-      <Footer />
+      <Footer onNavigateMeet={navigateToMeet} />
 
       <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
@@ -59,3 +98,4 @@ export default function App() {
     </div>
   );
 }
+
