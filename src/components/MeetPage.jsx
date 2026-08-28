@@ -8,7 +8,7 @@ export default function MeetPage({ onBackToHome }) {
     const params = new URLSearchParams(window.location.search);
     const linkParam = params.get('link') || params.get('meet');
     if (linkParam) return linkParam;
-    return localStorage.getItem('bhx_meet_url') || 'https://meet.google.com/xyz-abc-def';
+    return localStorage.getItem('bhx_meet_url') || 'https://meet.google.com/vxd-hrkm-hxp';
   });
 
   const [copied, setCopied] = useState(false);
