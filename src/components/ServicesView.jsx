@@ -7,32 +7,58 @@ export default function ServicesView({ onOpenBooking }) {
   const detailedServices = [
     {
       num: "01",
-      title: "Content Strategy & Positioning",
-      tagline: "Decide what to make, for whom, and to what specific business outcome.",
-      desc: "Before shooting a single frame, we define your content positioning so every piece has a clear job and a measurable return. We eliminate wasteful production and align content to real commercial goals.",
+      title: "Micro-Drama (Live Action & AI Production)",
+      tagline: "Vertical short-form drama slates combining live-action shoots and generative AI production.",
+      desc: "Operator-level experience scaling vertical short-form drama slates (58+ shows across 4 South Indian languages at Kuku TV). We combine live action location shoots with state-of-the-art AI video generation pipeline workflows for fast episode iteration, cliffhanger retention, and slate scaling.",
       deliverables: [
-        "Executive Content Positioning Blueprint",
-        "Channel Architecture & Format Mix",
-        "Audience Persona & Retention Framework",
-        "Quarterly Content Roadmap"
+        "Micro-Drama Slate Concepting & Series Bible",
+        "Live Action Cinema Shoot & Direction",
+        "AI Video Generation & VFX Enhancement Pipeline",
+        "Retention Pacing, Cliffhanger & Audio Dubbing"
       ],
-      bestFor: "Brands, product owners & founders scaling their content investment."
+      bestFor: "OTT platforms, micro-drama apps, content studios & brand entertainment."
     },
     {
       num: "02",
-      title: "Brand Content & Commercial Films",
-      tagline: "Concept to finished film — ads, brand films, and campaign launch assets.",
-      desc: "High-concept commercial films conceived from marketing briefs. From narrative scripting and location cinema shoots to DaVinci color grading and master sound design, we produce films that elevate your brand.",
+      title: "Influencers & Creator Marketing",
+      tagline: "End-to-end influencer strategy, creator sourcing, creative direction, and campaign execution.",
+      desc: "We bridge brand marketing objectives with authentic creator voices. Having run an 80,000-subscriber content channel, Bharath C.S. manages creators from both sides—sourcing the right influencers, structuring performance briefs, and managing full multi-creator campaign deployment.",
       deliverables: [
-        "Scriptwriting & Storyboards",
+        "Influencer Selection & Audience Alignment",
+        "Creative Briefing & Format Direction",
+        "Multi-Platform Campaign Execution (Reels/YouTube/Shorts)",
+        "Performance Tracking & ROAS Attribution"
+      ],
+      bestFor: "D2C brands, consumer tech, lifestyle, and high-growth consumer apps."
+    },
+    {
+      num: "03",
+      title: "AI Production for Ad Films",
+      tagline: "Generative AI workflows for high-impact TVCs, brand commercials, and creative variations.",
+      desc: "Leveraging cutting-edge AI tools alongside cinema craft to produce ad films faster and at higher creative scale. From realistic AI storyboarding and synthetic environment creation to rapid video creative A/B testing variations for digital & television ads.",
+      deliverables: [
+        "AI Concepting, Photorealistic Pre-Viz & Storyboarding",
+        "Generative AI Video & Virtual Set Commercial Production",
+        "Rapid Batch Ad Variations (15s / 30s / 60s)",
+        "Cinematic Color Grading & AI Audio Mastering"
+      ],
+      bestFor: "Brands, ad agencies, and marketing leaders launching major ad campaigns."
+    },
+    {
+      num: "04",
+      title: "Brand Content & Commercial Films",
+      tagline: "Concept to finished film — high-concept ads, brand stories, and product launch assets.",
+      desc: "Commercial films conceived from brand marketing briefs. From narrative scripting and location cinema shoots to DaVinci color grading and master sound design, we produce films that elevate your brand.",
+      deliverables: [
+        "Scriptwriting & Commercial Storyboards",
         "Director & Cinema DP Crew",
         "16:9 Master Cut + 9:16 Social Cutdowns",
         "Licensed Broadcast Soundtrack"
       ],
-      bestFor: "Marketing teams & agencies launching new products or major campaigns."
+      bestFor: "Marketing teams & enterprise brands launching new products or campaigns."
     },
     {
-      num: "03",
+      num: "05",
       title: "Performance Marketing & Conversion Content",
       tagline: "Creatives built to convert, and campaigns engineered to pay back.",
       desc: "Content engineered specifically for performance marketing. We combine high-retention creative hooks, dynamic visual typography, and systematic creative testing to lower your CAC and lift ROAS.",
@@ -45,43 +71,17 @@ export default function ServicesView({ onOpenBooking }) {
       bestFor: "D2C brands, e-commerce stores & growth marketing leads."
     },
     {
-      num: "04",
-      title: "Employer Branding & Talent Storytelling",
+      num: "06",
+      title: "Employer Branding & Content Engine Scale",
       tagline: "Show senior talent why your company is the best place to build their career.",
-      desc: "Leveraging Bharath C.S.'s experience leading Amazon's employer brand across Asia Pacific, we craft authentic employee narratives and recruitment content that attracts top 1% talent.",
+      desc: "Leveraging Bharath C.S.'s experience leading Amazon's employer brand across Asia Pacific, we craft authentic employee narratives, recruitment content, and scalable in-house content engines.",
       deliverables: [
         "Day in the Life & Team Spotlight Films",
         "Leadership & Engineering Culture Series",
         "APAC Regional Localization & Dubbing",
-        "Recruitment Campaign Video Assets"
+        "In-House Studio Setup & Content Automation"
       ],
       bestFor: "Global Capability Centers (GCCs), tech enterprises & high-growth scaleups."
-    },
-    {
-      num: "05",
-      title: "Micro-Drama & Serialized TV Content",
-      tagline: "Short vertical drama slates and broadcast TV programming at scale.",
-      desc: "Operator-level experience scaling vertical short-form drama slates (58+ shows across 4 South Indian languages at Kuku TV) and running regional broadcast TV programming at Culture Machine.",
-      deliverables: [
-        "Micro-Drama Slate Concepting & Bible",
-        "High-Volume Episode Scripting & Shooting",
-        "Retention Pacing & Cliffhanger Engineering",
-        "Multi-Language Audio Dubbing"
-      ],
-      bestFor: "OTT platforms, micro-drama apps & television networks."
-    },
-    {
-      num: "06",
-      title: "Content Engine Scale & Business Transformation",
-      tagline: "Stand up a content machine that grows a new business fast.",
-      desc: "We build scalable content engines for companies that need to increase production volume dramatically without sacrificing craft quality or inflating fixed headcount costs.",
-      deliverables: [
-        "In-House Studio Setup & Workflow Blueprint",
-        "Marketing Automation & Asset Pipeline Setup",
-        "1% Specialist Network Access & Matching",
-        "Team SOPs & Quality Gating Protocols"
-      ],
-      bestFor: "Founders, enterprise CMOs & media business leaders."
     }
   ];
 

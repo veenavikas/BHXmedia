@@ -74,44 +74,44 @@ export const SITE_DATA = {
     items: [
       {
         num: "01",
-        title: "Brand films & video",
-        desc: "Ad films, brand stories, and product films that hold attention and sell.",
-        proof: "Directed for Microsoft, Lonza, GMR. Built Amazon India's in-house studio."
-      },
-      {
-        num: "02",
-        title: "Influencer & creator marketing",
-        desc: "Creator strategy, sourcing, briefs, and full campaign management, matched to the outcome you want.",
-        proof: "Runs an 80,000-subscriber channel, so I read creators from both sides."
-      },
-      {
-        num: "03",
-        title: "Performance content",
-        desc: "Content built to convert across D2C, e-commerce, and paid, not just to look good.",
-        proof: "Ran performance and marketplace content, including GI-tagged handicrafts."
-      },
-      {
-        num: "04",
-        title: "Micro-drama & short-form",
-        desc: "Vertical micro-drama and serialized short-form, from script to slate, end to end.",
+        title: "Micro-drama (Live Action & AI Production)",
+        desc: "Vertical micro-drama slates and serialized short-form, combining live action shoot direction with cutting-edge AI video production from script to slate.",
         proof: "Scaled Kuku TV from 15 to 58+ shows across four South Indian languages."
       },
       {
+        num: "02",
+        title: "Influencers & Creator Marketing",
+        desc: "Influencer campaign strategy, creator discovery, creative direction, and full campaign management, engineered to drive engagement and sales.",
+        proof: "Runs an 80,000-subscriber channel, reading and managing creators from both sides."
+      },
+      {
+        num: "03",
+        title: "AI Production for Ad Films",
+        desc: "Generative AI video workflows for TVCs, brand ad films, hyper-realistic concept development, and rapid creative variations at scale.",
+        proof: "Directed ad films for Microsoft, Lonza, GMR. Built Amazon India's in-house studio."
+      },
+      {
+        num: "04",
+        title: "Brand Films & Commercials",
+        desc: "Ad films, brand stories, and product films that hold attention, build trust, and sell.",
+        proof: "500+ TVCs and brand films produced across Amazon India and top global brands."
+      },
+      {
         num: "05",
-        title: "Employer branding",
-        desc: "Recruitment films, culture content, and EVP that actually helps you hire.",
-        proof: "Head of Content, APAC for Amazon India's employer brand."
+        title: "Performance Content & Conversion",
+        desc: "Content built specifically to convert across D2C, e-commerce, and paid channels.",
+        proof: "Ran performance and marketplace content, including GI-tagged Indian handicrafts."
       },
       {
         num: "06",
-        title: "Content strategy & positioning",
-        desc: "What to make, for whom, and why it will sell. Editorial systems and content-to-sales mapping.",
-        proof: "Content read as a product with unit economics, not just creative."
+        title: "Employer Branding",
+        desc: "Recruitment films, culture content, and EVP that helps global capability centers attract top talent.",
+        proof: "Head of Content, APAC for Amazon India's employer brand."
       },
       {
         num: "07",
-        title: "Content at scale & studio setup",
-        desc: "In-house content engines, systems, and automation for brand teams and GCCs launching in India.",
+        title: "Content Strategy & Scale",
+        desc: "What to make, for whom, and why it will sell. In-house content engines, systems, and automation.",
         proof: "Delivered 50,000+ assets. Built the tooling to run content industrially."
       },
       {
