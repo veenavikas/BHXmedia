@@ -1,105 +1,192 @@
 import React, { useState } from 'react';
-import workData from '../data/work.json';
 
-export default function WorkView({ onOpenVideo, onOpenBooking }) {
-  const [activeCategory, setActiveCategory] = useState('All');
+export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest }) {
+  const [reelModalOpen, setReelModalOpen] = useState(false);
+  const [reelEmail, setReelEmail] = useState('');
+  const [reelSubmitted, setReelSubmitted] = useState(false);
 
-  const categories = ['All', ...Array.from(new Set(workData.map(w => w.category)))];
+  const handleNav = (path) => {
+    if (onNavigate) onNavigate(path);
+    else window.location.href = path;
+  };
 
-  const filteredItems = activeCategory === 'All'
-    ? workData
-    : workData.filter(w => w.category === activeCategory);
+  const handleReelSubmit = (e) => {
+    e.preventDefault();
+    setReelSubmitted(true);
+  };
 
-  const playIcon = (
-    <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: 'var(--paper)' }}>
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
+  const cases = [
+    {
+      studio: 'Longform',
+      title: 'Regional TV Broadcast Series Slate',
+      tagline: 'Multi-season script bibles and episode production management.',
+      summary: 'Delivered serialized television and OTT streaming series slates for South Indian regional networks.',
+      proof: 'Past role at Sun TV Network & Culture Machine'
+    },
+    {
+      studio: 'Cliffhanger',
+      title: '58+ Micro-Drama Shows Scaled',
+      tagline: 'Algorithmic script intelligence & vertical short-form production.',
+      summary: 'Grew micro-drama slate from 15 to 58+ shows across 4 South Indian languages with data-backed hook density.',
+      proof: 'Past role at Kuku TV; DAIVA'
+    },
+    {
+      studio: 'Frame',
+      title: '500+ Commercial TVCs & Brand Films',
+      tagline: 'High-concept brand narrative films and product launch commercials.',
+      summary: 'Built in-house production studio and delivered 50,000+ brand marketing assets.',
+      proof: 'Past role at Amazon India'
+    },
+    {
+      studio: 'Creator Circle',
+      title: 'Multi-Creator Influencer Campaign (Anonymised)',
+      tagline: 'Performance-led creator strategy and execution across 25+ influencers.',
+      summary: 'Structured creator briefs and attribution tracking yielding 3.2x ROAS lift for consumer brand rollout.',
+      proof: 'Live multi-creator campaign (anonymised)'
+    },
+    {
+      studio: 'Frame',
+      title: 'APAC Employer Brand Recruitment Series',
+      tagline: 'Culture films and day-in-the-life employee storytelling.',
+      summary: 'Produced recruitment campaign assets for tech engineering hubs across Asia Pacific.',
+      proof: 'Past role at Amazon APAC Employer Brand'
+    },
+    {
+      studio: 'The Engine',
+      title: 'D2C Brand Content Positioning & Scale',
+      tagline: 'Content strategy blueprint and unit economics alignment.',
+      summary: 'Mapped content-to-sales pipeline for Indian handicraft and lifestyle marketplaces.',
+      proof: 'BHX Strategy Engine Case'
+    }
+  ];
 
   return (
-    <div style={{ paddingTop: '40px', paddingBottom: '80px' }}>
+    <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', padding: '64px 0 96px' }}>
       <div className="wrap">
         
-        {/* Page Header */}
-        <div className="sec-head rv in" style={{ maxWidth: '80ch', marginBottom: '40px' }}>
-          <span className="mono eyebrow">Selected work · 30 Years</span>
-          <h2>The work speaks first.</h2>
-          <p className="lead">
-            Work produced for major platforms and enterprises including Amazon India, Amazon Asia Pacific, Microsoft, Nokia, OnePlus, Kuku TV, Culture Machine, and regional D2C brands. Click any film to watch.
+        {/* Header */}
+        <div style={{ maxWidth: '800px', marginBottom: '48px' }}>
+          <div className="copper-tag" style={{ marginBottom: '12px' }}>Selected Work &amp; Case Summaries</div>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', color: '#F4EFE5', lineHeight: 1.1, marginBottom: '20px' }}>
+            Work engineered for commercial ROI.
+          </h1>
+          <p style={{ fontSize: '18px', color: '#B8AE9C', lineHeight: 1.6 }}>
+            A selection of case summaries across our four BHX studios. Complete private showreels and confidential brand films are available upon request.
           </p>
-        </div>
-
-        {/* Category Filters */}
-        <div className="filters rv in" role="tablist" aria-label="Filter work by category" style={{ marginBottom: '2.2rem' }}>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`filter ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
-              role="tab"
-              aria-selected={activeCategory === cat}
-            >
-              {cat}
-            </button>
-          ))}
         </div>
 
         {/* Work Grid */}
-        <div className="work-grid rv in">
-          {filteredItems.map((item) => (
-            <button
-              key={item.id}
-              className="card"
-              onClick={() => onOpenVideo(item)}
-              aria-label={`Play ${item.title}`}
-            >
-              <div className="card-media">
-                <span className="card-tag">{item.category}</span>
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  loading="lazy"
-                />
-                <div className="play">
-                  <span>{playIcon}</span>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '56px' }}>
+          {cases.map((item, idx) => (
+            <div key={idx} style={{
+              backgroundColor: '#242220',
+              border: '1px solid #33302B',
+              borderRadius: '8px',
+              padding: '28px',
+              display: 'flex',
+              flexDirection: 'column',
+              justify: 'space-between'
+            }}>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <span className="copper-tag" style={{ fontSize: '11px' }}>{item.studio}</span>
                 </div>
+                <h3 style={{ fontSize: '20px', color: '#F4EFE5', marginBottom: '8px' }}>{item.title}</h3>
+                <div style={{ fontSize: '13px', color: '#C6884F', fontWeight: 500, marginBottom: '12px' }}>{item.tagline}</div>
+                <p style={{ fontSize: '14px', color: '#B8AE9C', lineHeight: 1.6, marginBottom: '20px' }}>{item.summary}</p>
               </div>
-              <div className="card-body">
-                <h3>{item.title}</h3>
-                <div className="card-meta">
-                  <span className="client">{item.client}</span>
-                  <span className="yr">{item.year}</span>
-                </div>
+
+              <div style={{ paddingTop: '16px', borderTop: '1px solid #33302B', fontSize: '12px', color: '#8A8275' }}>
+                <strong style={{ color: '#F4EFE5' }}>Context:</strong> {item.proof}
               </div>
-            </button>
+            </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div 
-          className="rv in"
-          style={{
-            marginTop: '64px',
-            background: 'var(--ink-2)',
-            border: '1px solid var(--line)',
-            borderRadius: '16px',
-            padding: '48px 36px',
-            textAlign: 'center'
-          }}
-        >
-          <span className="mono eyebrow" style={{ justifyContent: 'center' }}>Let's build</span>
-          <h2 style={{ color: 'var(--paper)', fontSize: '32px', fontWeight: 500, marginBottom: '16px' }}>
-            Want to build films or slates like these for your brand?
-          </h2>
-          <p className="lead" style={{ margin: '0 auto 28px' }}>
-            Book a 30-minute introductory call with Bharath C.S.
+        {/* Private Reel CTA */}
+        <div style={{
+          backgroundColor: '#1E1C1A',
+          border: '1px solid #33302B',
+          borderRadius: '12px',
+          padding: '48px 36px',
+          textAlign: 'center',
+          maxWidth: '700px',
+          margin: '0 auto'
+        }}>
+          <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '12px' }}>Request the Private Reel</h2>
+          <p style={{ fontSize: '15px', color: '#B8AE9C', marginBottom: '28px' }}>
+            Looking for specific showreels in brand films, AI micro-drama, or TV series? We share full private video reels with verified partners.
           </p>
-          <button className="btn btn-gold" onClick={onOpenBooking}>
-            Book a call &rarr;
+          <button 
+            onClick={() => setReelModalOpen(true)} 
+            className="btn-copper"
+            style={{ padding: '12px 28px' }}
+          >
+            Request Private Reel &rarr;
           </button>
         </div>
 
       </div>
+
+      {/* Private Reel Request Modal */}
+      {reelModalOpen && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          backdropFilter: 'blur(4px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 200,
+          padding: '24px'
+        }} onClick={() => setReelModalOpen(false)}>
+          <div style={{
+            backgroundColor: '#1E1C1A',
+            border: '1px solid #33302B',
+            borderRadius: '12px',
+            padding: '32px',
+            maxWidth: '480px',
+            width: '100%'
+          }} onClick={(e) => e.stopPropagation()}>
+            {!reelSubmitted ? (
+              <form onSubmit={handleReelSubmit}>
+                <h3 style={{ fontSize: '22px', color: '#F4EFE5', marginBottom: '8px' }}>Request Private Reel</h3>
+                <p style={{ fontSize: '13.5px', color: '#B8AE9C', marginBottom: '20px' }}>
+                  Enter your work email to receive access to the private BHX showreel.
+                </p>
+                <input
+                  type="email"
+                  required
+                  value={reelEmail}
+                  onChange={(e) => setReelEmail(e.target.value)}
+                  placeholder="name@company.com"
+                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px', marginBottom: '16px' }}
+                />
+                <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                  <button type="button" onClick={() => setReelModalOpen(false)} className="btn-outline" style={{ padding: '8px 16px', fontSize: '13px' }}>
+                    Cancel
+                  </button>
+                  <button type="submit" className="btn-copper" style={{ padding: '8px 16px', fontSize: '13px' }}>
+                    Send Reel Access
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '28px', color: '#C6884F', marginBottom: '12px' }}>✓</div>
+                <h3 style={{ fontSize: '20px', color: '#F4EFE5', marginBottom: '8px' }}>Request Received</h3>
+                <p style={{ fontSize: '14px', color: '#B8AE9C', marginBottom: '20px' }}>
+                  We have logged your request for {reelEmail}. The private showreel link will be sent shortly.
+                </p>
+                <button onClick={() => { setReelModalOpen(false); setReelSubmitted(false); }} className="btn-outline" style={{ padding: '8px 16px', fontSize: '13px' }}>
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

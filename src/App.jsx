@@ -1,102 +1,122 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import OutputSection from './components/OutputSection';
-import Services from './components/Services';
-import ModelSection from './components/ModelSection';
-import WhoSection from './components/WhoSection';
-import WorkSection from './components/WorkSection';
-import RatesSection from './components/RatesSection';
-import FAQSection from './components/FAQSection';
-import FinalSection from './components/FinalSection';
+import HomeView from './components/HomeView';
+import StudioLandingPage from './components/StudioLandingPage';
+import BriefView from './components/BriefView';
+import WorkView from './components/WorkView';
+import AboutView from './components/AboutView';
+import BlogView from './components/BlogView';
+import BlogPostView from './components/BlogPostView';
+import ThankYouView from './components/ThankYouView';
+import PrivacyView from './components/PrivacyView';
 import Footer from './components/Footer';
-import VideoModal from './components/VideoModal';
 import BookingModal from './components/BookingModal';
-import WhatsAppButton from './components/WhatsAppButton';
 import MeetPage from './components/MeetPage';
 
 export default function App() {
-  const [activeVideo, setActiveVideo] = useState(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [currentView, setCurrentView] = useState(() => {
-    const p = window.location.pathname.toLowerCase();
-    const h = window.location.hash.toLowerCase();
-    return p === '/meet' || p === '/meet/' || h === '#meet' ? 'meet' : 'home';
+  const [currentPath, setCurrentPath] = useState(() => {
+    return window.location.pathname.toLowerCase();
   });
 
   useEffect(() => {
     const handleLocationChange = () => {
-      const p = window.location.pathname.toLowerCase();
-      const h = window.location.hash.toLowerCase();
-      if (p === '/meet' || p === '/meet/' || h === '#meet') {
-        setCurrentView('meet');
-      } else {
-        setCurrentView('home');
-      }
+      setCurrentPath(window.location.pathname.toLowerCase());
     };
 
     window.addEventListener('popstate', handleLocationChange);
-    window.addEventListener('hashchange', handleLocationChange);
     return () => {
       window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('hashchange', handleLocationChange);
     };
   }, []);
 
-  useEffect(() => {
-    if (currentView === 'home' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((en) => {
-            if (en.isIntersecting) {
-              en.target.classList.add('in');
-              io.unobserve(en.target);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
+  const navigateTo = (path) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path.toLowerCase());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-      document.querySelectorAll('.rv').forEach((el) => io.observe(el));
-      return () => io.disconnect();
+  // Route matching logic
+  const renderContent = () => {
+    const path = currentPath.replace(/\/$/, '') || '/';
+
+    // Google Meet Page
+    if (path === '/meet' || path === '#meet') {
+      return <MeetPage onBackToHome={() => navigateTo('/')} />;
     }
-  }, [currentView]);
 
-  const navigateToHome = () => {
-    window.history.pushState({}, '', '/');
-    setCurrentView('home');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Brief Form Page
+    if (path === '/brief') {
+      return <BriefView onNavigate={navigateTo} />;
+    }
+
+    // Thank You Page
+    if (path === '/thank-you') {
+      return <ThankYouView onNavigate={navigateTo} onOpenBooking={() => setIsBookingOpen(true)} />;
+    }
+
+    // Privacy Policy Page
+    if (path === '/privacy') {
+      return <PrivacyView />;
+    }
+
+    // Work Page
+    if (path === '/work') {
+      return <WorkView onNavigate={navigateTo} onOpenBooking={() => setIsBookingOpen(true)} />;
+    }
+
+    // About Page
+    if (path === '/about') {
+      return <AboutView onNavigate={navigateTo} onOpenBooking={() => setIsBookingOpen(true)} />;
+    }
+
+    // Insights Blog List & Posts
+    if (path === '/insights') {
+      return <BlogView onNavigate={navigateTo} onSelectPost={(slug) => navigateTo(`/insights/${slug}`)} />;
+    }
+
+    if (path.startsWith('/insights/')) {
+      const slug = path.replace('/insights/', '');
+      return <BlogPostView postSlug={slug} onNavigate={navigateTo} onBack={() => navigateTo('/insights')} onOpenBooking={() => setIsBookingOpen(true)} />;
+    }
+
+    // Studio Landing Pages
+    if (path.startsWith('/studios/')) {
+      const studioId = path.replace('/studios/', '');
+      return <StudioLandingPage studioId={studioId} onNavigate={navigateTo} onOpenBooking={() => setIsBookingOpen(true)} />;
+    }
+
+    // Default Home View
+    return (
+      <HomeView 
+        onNavigate={navigateTo} 
+        onOpenBooking={() => setIsBookingOpen(true)} 
+      />
+    );
   };
 
-  const navigateToMeet = () => {
-    window.history.pushState({}, '', '/meet');
-    setCurrentView('meet');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  if (currentView === 'meet') {
-    return <MeetPage onBackToHome={navigateToHome} />;
-  }
+  // Hide standard header/footer on studio landing pages (since studio pages have logo-only header and custom footer)
+  const isStudioPage = currentPath.startsWith('/studios/') || currentPath === '/meet';
 
   return (
-    <div>
-      <Navbar onOpenBooking={() => setIsBookingOpen(true)} />
-      <Hero onOpenBooking={() => setIsBookingOpen(true)} />
-      <OutputSection />
-      <Services />
-      <ModelSection />
-      <WhoSection />
-      <WorkSection onOpenVideo={(videoObj) => setActiveVideo(videoObj)} />
-      <RatesSection onOpenBooking={() => setIsBookingOpen(true)} />
-      <FAQSection />
-      <FinalSection onOpenBooking={() => setIsBookingOpen(true)} />
-      <Footer />
+    <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh' }}>
+      {!isStudioPage && (
+        <Navbar 
+          currentPath={currentPath} 
+          onNavigate={navigateTo} 
+          onOpenBooking={() => setIsBookingOpen(true)} 
+        />
+      )}
 
-      <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />
+      <main>
+        {renderContent()}
+      </main>
+
+      {!isStudioPage && (
+        <Footer onNavigate={navigateTo} />
+      )}
+
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-      <WhatsAppButton />
     </div>
   );
 }
-
-
