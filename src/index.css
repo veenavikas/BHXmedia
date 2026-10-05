@@ -1,23 +1,30 @@
 /* ============================================================
-   BHX MEDIA — Design System & Brand Tokens
-   Charcoal Ink (#1B1A18) | Warm Ivory (#F4EFE5) | Digital Copper (#C6884F)
-   Font: Archivo (400, 500, 700)
+   BHX MEDIA — Design System & Brand Tokens (Soft Turmeric + Ink - Option Y4c)
+   Main Page Background: Soft Turmeric (#F6DE9A)
+   Inner Reading Pages: Cream (#FAEBC4)
+   Cards / Surface: (#FBEBC0)
+   Ink Text: (#1C1A17)
+   Muted: (#4E4130)
+   Laterite Buttons & Links: (#7A3E2B)
+   Turmeric Highlights on Dark Bands: (#E0A21B)
+   Paper Text on Ink: (#F4EFE6)
+   Border: (#E8C870)
+   Font: Bricolage Grotesque
    ============================================================ */
 
 :root {
-  --bg-dark: #1B1A18;
-  --bg-light: #F4EFE5;
-  --card-dark: #242220;
-  --card-light: #EBE5DA;
-  --accent: #C6884F;
-  --accent-hover: #b57942;
-  --text-dark: #F4EFE5;
-  --text-light: #1B1A18;
-  --text-muted-dark: #B8AE9C;
-  --text-muted-light: #6E655A;
-  --border-dark: #33302B;
-  --border-light: #DCD4C7;
-  --font-main: 'Archivo', system-ui, -apple-system, sans-serif;
+  --bhx-bg: #F6DE9A;         /* Soft Turmeric: Main page background */
+  --bhx-bg-reading: #FAEBC4; /* Cream: Inner pages, blogs, case studies */
+  --bhx-surface: #FBEBC0;    /* Card: Cards, panels */
+  --bhx-text: #1C1A17;       /* Ink: Headings, body text, dark bands */
+  --bhx-muted: #4E4130;      /* Muted: Secondary text, captions */
+  --bhx-laterite: #7A3E2B;   /* Laterite: Buttons, links, small accents, bindu on yellow */
+  --bhx-laterite-hover: #623020;
+  --bhx-turmeric: #E0A21B;   /* Turmeric: Highlights on dark bands only; bindu on ink */
+  --bhx-paper: #F4EFE6;      /* Paper: Text on ink bands and buttons */
+  --bhx-border: #E8C870;     /* Border: Lines, card borders */
+  
+  --font-main: 'Bricolage Grotesque', 'Archivo', system-ui, -apple-system, sans-serif;
   --maxw: 1200px;
 }
 
@@ -29,8 +36,8 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
+  background-color: var(--bhx-bg);
+  color: var(--bhx-text);
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
 }
@@ -38,8 +45,8 @@ html {
 body {
   font-family: var(--font-main);
   font-weight: 400;
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
+  background-color: var(--bhx-bg);
+  color: var(--bhx-text);
   line-height: 1.6;
 }
 
@@ -48,15 +55,16 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
+  color: var(--bhx-text);
 }
 
 p {
   font-weight: 400;
-  color: var(--text-muted-dark);
+  color: var(--bhx-muted);
 }
 
 a {
-  color: inherit;
+  color: var(--bhx-laterite);
   text-decoration: none;
   transition: opacity 0.2s ease, color 0.2s ease;
 }
@@ -72,28 +80,32 @@ button, input, select, textarea {
 }
 
 /* Accent highlight */
-.copper-text {
-  color: var(--accent);
+.copper-text, .laterite-text {
+  color: var(--bhx-laterite);
 }
 
-.copper-tag {
+.turmeric-text {
+  color: var(--bhx-turmeric);
+}
+
+.copper-tag, .laterite-tag {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--bhx-laterite);
 }
 
-/* Primary Button */
-.btn-copper {
+/* Primary Button: Laterite with Paper text */
+.btn-copper, .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--accent);
-  color: #FFFFFF;
+  background-color: var(--bhx-laterite);
+  color: var(--bhx-paper) !important;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 12px 24px;
   border-radius: 6px;
   border: none;
@@ -101,31 +113,50 @@ button, input, select, textarea {
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.btn-copper:hover {
-  background-color: var(--accent-hover);
+.btn-copper:hover, .btn-primary:hover {
+  background-color: var(--bhx-laterite-hover);
   transform: translateY(-1px);
 }
 
-/* Secondary Button */
-.btn-outline {
+/* Secondary Button: Ink border with Ink text */
+.btn-outline, .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   background-color: transparent;
-  color: var(--text-dark);
+  color: var(--bhx-text);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 12px 24px;
   border-radius: 6px;
-  border: 1px solid var(--border-dark);
+  border: 1.5px solid var(--bhx-text);
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.btn-outline:hover, .btn-secondary:hover {
+  background-color: rgba(28, 26, 23, 0.06);
+  border-color: var(--bhx-text);
+  color: var(--bhx-text);
+}
+
+/* Dark Band utility */
+.band-dark {
+  background-color: var(--bhx-text);
+  color: var(--bhx-paper);
+}
+
+.band-dark h1, .band-dark h2, .band-dark h3, .band-dark h4 {
+  color: var(--bhx-paper);
+}
+
+.band-dark p {
+  color: #D4CDC3;
+}
+
+.band-dark .highlight {
+  color: var(--bhx-turmeric);
 }
 
 /* Subtle reveal animation */

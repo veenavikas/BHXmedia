@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from './Navbar';
 import BriefForm from './BriefForm';
 import Footer from './Footer';
@@ -74,37 +74,37 @@ export default function StudioLandingPage({ studioId, onNavigate, onOpenBooking 
   const data = STUDIO_DATA[studioId] || STUDIO_DATA.frame;
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--bhx-bg-reading)', minHeight: '100vh', color: 'var(--bhx-text)' }}>
       
       {/* Minimal Header (Logo only) per Section 7 of Brief */}
       <Navbar minimal={true} onNavigate={onNavigate} onOpenBooking={onOpenBooking} />
 
       {/* Hero Section */}
-      <section style={{ padding: '64px 0 48px', borderBottom: '1px solid var(--border-dark)' }}>
+      <section style={{ padding: '64px 0 48px', borderBottom: '1px solid var(--bhx-border)' }}>
         <div className="wrap">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'start' }}>
             
             {/* Left Content */}
             <div>
               <div style={{ display: 'inline-block', marginBottom: '12px' }}>
-                <span style={{ fontSize: '28px', fontWeight: 700, color: '#F4EFE5', display: 'block' }}>{data.name}</span>
-                <span className="copper-tag" style={{ fontSize: '12px' }}>{data.tag}</span>
+                <span style={{ fontSize: '32px', fontWeight: 700, color: 'var(--bhx-text)', display: 'block' }}>{data.name}</span>
+                <span className="laterite-tag" style={{ fontSize: '12px' }}>{data.tag}</span>
               </div>
 
-              <h1 style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#F4EFE5', margin: '16px 0 20px', lineHeight: 1.15 }}>
+              <h1 style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: 'var(--bhx-text)', margin: '16px 0 20px', lineHeight: 1.15 }}>
                 {data.promise}
               </h1>
 
               <div style={{
                 padding: '16px 20px',
                 borderRadius: '8px',
-                backgroundColor: '#242220',
-                border: '1px solid var(--border-dark)',
+                backgroundColor: 'var(--bhx-surface)',
+                border: '1px solid var(--bhx-border)',
                 fontSize: '14px',
-                color: '#B8AE9C',
+                color: 'var(--bhx-muted)',
                 marginBottom: '28px'
               }}>
-                <strong style={{ color: '#F4EFE5', display: 'block', marginBottom: '4px' }}>Proof of Authority:</strong>
+                <strong style={{ color: 'var(--bhx-text)', display: 'block', marginBottom: '4px' }}>Proof of Authority:</strong>
                 {data.proof}
               </div>
 
@@ -117,13 +117,13 @@ export default function StudioLandingPage({ studioId, onNavigate, onOpenBooking 
 
             {/* Right: Brief Form Visible on First Screen */}
             <div style={{
-              backgroundColor: '#1E1C1A',
-              border: '1px solid #33302B',
+              backgroundColor: 'var(--bhx-surface)',
+              border: '1px solid var(--bhx-border)',
               borderRadius: '12px',
               padding: '28px'
             }}>
-              <h3 style={{ fontSize: '20px', color: '#F4EFE5', marginBottom: '6px' }}>Submit a Brief for {data.name}</h3>
-              <p style={{ fontSize: '13px', color: '#B8AE9C', marginBottom: '20px' }}>
+              <h3 style={{ fontSize: '20px', color: 'var(--bhx-text)', marginBottom: '6px' }}>Submit a Brief for {data.name}</h3>
+              <p style={{ fontSize: '13.5px', color: 'var(--bhx-muted)', marginBottom: '20px' }}>
                 Tell us your goals. We review and respond within 24 hours.
               </p>
               <BriefForm 
@@ -140,23 +140,23 @@ export default function StudioLandingPage({ studioId, onNavigate, onOpenBooking 
       </section>
 
       {/* 3 Outcome Points */}
-      <section style={{ padding: '64px 0', borderBottom: '1px solid var(--border-dark)' }}>
+      <section style={{ padding: '64px 0', borderBottom: '1px solid var(--bhx-border)' }}>
         <div className="wrap">
-          <div className="copper-tag" style={{ marginBottom: '12px' }}>Core Outcomes</div>
-          <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '36px' }}>
+          <div className="laterite-tag" style={{ marginBottom: '12px' }}>Core Outcomes</div>
+          <h2 style={{ fontSize: '30px', color: 'var(--bhx-text)', marginBottom: '36px' }}>
             What {data.name} delivers for your business
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {data.outcomes.map((item, idx) => (
               <div key={idx} style={{
-                backgroundColor: '#242220',
-                border: '1px solid #33302B',
+                backgroundColor: 'var(--bhx-surface)',
+                border: '1px solid var(--bhx-border)',
                 borderRadius: '8px',
                 padding: '24px'
               }}>
-                <div style={{ color: '#C6884F', fontWeight: 700, fontSize: '14px', marginBottom: '8px' }}>0{idx + 1}. {item.title}</div>
-                <p style={{ fontSize: '14px', color: '#B8AE9C', lineHeight: 1.5 }}>{item.desc}</p>
+                <div style={{ color: 'var(--bhx-laterite)', fontWeight: 700, fontSize: '14px', marginBottom: '8px' }}>0{idx + 1}. {item.title}</div>
+                <p style={{ fontSize: '14.5px', color: 'var(--bhx-muted)', lineHeight: 1.5 }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -164,46 +164,46 @@ export default function StudioLandingPage({ studioId, onNavigate, onOpenBooking 
       </section>
 
       {/* Method: Scope. Select. Ship. */}
-      <section style={{ padding: '64px 0', borderBottom: '1px solid var(--border-dark)' }}>
+      <section style={{ padding: '64px 0', borderBottom: '1px solid var(--bhx-border)' }}>
         <div className="wrap">
-          <div className="copper-tag" style={{ marginBottom: '12px' }}>The Method</div>
-          <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '36px' }}>
+          <div className="laterite-tag" style={{ marginBottom: '12px' }}>The Method</div>
+          <h2 style={{ fontSize: '30px', color: 'var(--bhx-text)', marginBottom: '36px' }}>
             How {data.name} operates: Scope. Select. Ship.
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-            <div style={{ padding: '24px', backgroundColor: '#242220', borderRadius: '8px', border: '1px solid #33302B' }}>
-              <div style={{ color: '#C6884F', fontSize: '12px', fontWeight: 700, marginBottom: '6px' }}>STEP 01</div>
-              <h3 style={{ fontSize: '18px', color: '#F4EFE5', marginBottom: '8px' }}>Scope</h3>
-              <p style={{ fontSize: '14px', color: '#B8AE9C' }}>Decide what is worth making. We eliminate non-essential content before spending budget.</p>
+            <div style={{ padding: '24px', backgroundColor: 'var(--bhx-surface)', borderRadius: '8px', border: '1px solid var(--bhx-border)' }}>
+              <div style={{ color: 'var(--bhx-laterite)', fontSize: '12px', fontWeight: 700, marginBottom: '6px' }}>STEP 01</div>
+              <h3 style={{ fontSize: '19px', color: 'var(--bhx-text)', marginBottom: '8px' }}>Scope</h3>
+              <p style={{ fontSize: '14px', color: 'var(--bhx-muted)' }}>Decide what is worth making. We eliminate non-essential content before spending budget.</p>
             </div>
 
-            <div style={{ padding: '24px', backgroundColor: '#242220', borderRadius: '8px', border: '1px solid #33302B' }}>
-              <div style={{ color: '#C6884F', fontSize: '12px', fontWeight: 700, marginBottom: '6px' }}>STEP 02</div>
-              <h3 style={{ fontSize: '18px', color: '#F4EFE5', marginBottom: '8px' }}>Select</h3>
-              <p style={{ fontSize: '14px', color: '#B8AE9C' }}>Gate the quality. Only content engineered to convert and hold attention goes into production.</p>
+            <div style={{ padding: '24px', backgroundColor: 'var(--bhx-surface)', borderRadius: '8px', border: '1px solid var(--bhx-border)' }}>
+              <div style={{ color: 'var(--bhx-laterite)', fontSize: '12px', fontWeight: 700, marginBottom: '6px' }}>STEP 02</div>
+              <h3 style={{ fontSize: '19px', color: 'var(--bhx-text)', marginBottom: '8px' }}>Select</h3>
+              <p style={{ fontSize: '14px', color: 'var(--bhx-muted)' }}>Gate the quality. Only content engineered to convert and hold attention goes into production.</p>
             </div>
 
-            <div style={{ padding: '24px', backgroundColor: '#242220', borderRadius: '8px', border: '1px solid #33302B' }}>
-              <div style={{ color: '#C6884F', fontSize: '12px', fontWeight: 700, marginBottom: '6px' }}>STEP 03</div>
-              <h3 style={{ fontSize: '18px', color: '#F4EFE5', marginBottom: '8px' }}>Ship</h3>
-              <p style={{ fontSize: '14px', color: '#B8AE9C' }}>Deliver broadcast-ready assets on time, mapped directly to commercial outcomes.</p>
+            <div style={{ padding: '24px', backgroundColor: 'var(--bhx-surface)', borderRadius: '8px', border: '1px solid var(--bhx-border)' }}>
+              <div style={{ color: 'var(--bhx-laterite)', fontSize: '12px', fontWeight: 700, marginBottom: '6px' }}>STEP 03</div>
+              <h3 style={{ fontSize: '19px', color: 'var(--bhx-text)', marginBottom: '8px' }}>Ship</h3>
+              <p style={{ fontSize: '14px', color: 'var(--bhx-muted)' }}>Deliver broadcast-ready assets on time, mapped directly to commercial outcomes.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Short FAQ */}
-      <section style={{ padding: '64px 0', borderBottom: '1px solid var(--border-dark)' }}>
+      <section style={{ padding: '64px 0', borderBottom: '1px solid var(--bhx-border)' }}>
         <div className="wrap" style={{ maxWidth: '800px' }}>
-          <div className="copper-tag" style={{ marginBottom: '12px' }}>FAQ</div>
-          <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '32px' }}>Frequently Asked Questions</h2>
+          <div className="laterite-tag" style={{ marginBottom: '12px' }}>FAQ</div>
+          <h2 style={{ fontSize: '30px', color: 'var(--bhx-text)', marginBottom: '32px' }}>Frequently Asked Questions</h2>
 
           <div style={{ display: 'grid', gap: '20px' }}>
             {data.faq.map((item, idx) => (
-              <div key={idx} style={{ padding: '20px', backgroundColor: '#242220', borderRadius: '8px', border: '1px solid #33302B' }}>
-                <h4 style={{ fontSize: '16px', color: '#F4EFE5', marginBottom: '8px' }}>{item.q}</h4>
-                <p style={{ fontSize: '14px', color: '#B8AE9C' }}>{item.a}</p>
+              <div key={idx} style={{ padding: '22px', backgroundColor: 'var(--bhx-surface)', borderRadius: '8px', border: '1px solid var(--bhx-border)' }}>
+                <h4 style={{ fontSize: '17px', color: 'var(--bhx-text)', marginBottom: '8px' }}>{item.q}</h4>
+                <p style={{ fontSize: '14.5px', color: 'var(--bhx-muted)' }}>{item.a}</p>
               </div>
             ))}
           </div>
@@ -214,14 +214,14 @@ export default function StudioLandingPage({ studioId, onNavigate, onOpenBooking 
       <section style={{ padding: '64px 0' }}>
         <div className="wrap" style={{ maxWidth: '700px' }}>
           <div style={{
-            backgroundColor: '#1E1C1A',
-            border: '1px solid #33302B',
+            backgroundColor: 'var(--bhx-surface)',
+            border: '1px solid var(--bhx-border)',
             borderRadius: '12px',
             padding: '36px',
             textAlign: 'center'
           }}>
-            <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '8px' }}>Start Your Brief with {data.name}</h2>
-            <p style={{ fontSize: '14px', color: '#B8AE9C', marginBottom: '28px' }}>
+            <h2 style={{ fontSize: '28px', color: 'var(--bhx-text)', marginBottom: '8px' }}>Start Your Brief with {data.name}</h2>
+            <p style={{ fontSize: '14.5px', color: 'var(--bhx-muted)', marginBottom: '28px' }}>
               Submit your project details below or book a 30-minute intro call.
             </p>
             <BriefForm 

@@ -8,16 +8,16 @@ export default function BlogView({ onSelectPost, onNavigate }) {
   };
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', padding: '64px 0 96px' }}>
+    <div style={{ backgroundColor: 'var(--bhx-bg-reading)', minHeight: '100vh', padding: '64px 0 96px', color: 'var(--bhx-text)' }}>
       <div className="wrap">
         
         {/* Header */}
         <div style={{ maxWidth: '800px', marginBottom: '48px' }}>
-          <div className="copper-tag" style={{ marginBottom: '12px' }}>BHX Insights</div>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', color: '#F4EFE5', lineHeight: 1.1, marginBottom: '20px' }}>
+          <div className="laterite-tag" style={{ marginBottom: '12px' }}>BHX Insights</div>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', color: 'var(--bhx-text)', lineHeight: 1.1, marginBottom: '20px' }}>
             Strategy, AI search readiness &amp; content unit economics.
           </h1>
-          <p style={{ fontSize: '18px', color: '#B8AE9C', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '18px', color: 'var(--bhx-muted)', lineHeight: 1.6 }}>
             Restrained, fact-driven analysis on AI content strategy, micro-drama script analysis, and brand film positioning by Bharath C.S.
           </p>
         </div>
@@ -29,8 +29,8 @@ export default function BlogView({ onSelectPost, onNavigate }) {
               key={post.id}
               onClick={() => onSelectPost ? onSelectPost(post.slug) : handleNav(`/insights/${post.slug}`)}
               style={{
-                backgroundColor: '#242220',
-                border: '1px solid #33302B',
+                backgroundColor: 'var(--bhx-surface)',
+                border: '1px solid var(--bhx-border)',
                 borderRadius: '8px',
                 padding: '28px',
                 cursor: 'pointer',
@@ -38,27 +38,27 @@ export default function BlogView({ onSelectPost, onNavigate }) {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', marginBottom: '12px' }}>
-                <span className="copper-tag" style={{ fontSize: '11px' }}>
-                  ARTICLE . {post.readTime.toUpperCase()}
+                <span className="laterite-tag" style={{ fontSize: '11px' }}>
+                  ARTICLE · {post.readTime.toUpperCase()}
                 </span>
-                <span style={{ fontSize: '12px', color: '#8A8275' }}>
+                <span style={{ fontSize: '12px', color: 'var(--bhx-muted)' }}>
                   {post.date}
                 </span>
               </div>
 
-              <h2 style={{ fontSize: '22px', color: '#F4EFE5', marginBottom: '10px' }}>
+              <h2 style={{ fontSize: '24px', color: 'var(--bhx-text)', marginBottom: '10px' }}>
                 {post.title}
               </h2>
 
-              <p style={{ fontSize: '15px', color: '#B8AE9C', lineHeight: 1.6, marginBottom: '20px' }}>
+              <p style={{ fontSize: '15.5px', color: 'var(--bhx-muted)', lineHeight: 1.6, marginBottom: '20px' }}>
                 {post.subtitle}
               </p>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #33302B', paddingTop: '16px', fontSize: '13px' }}>
-                <span style={{ color: '#8A8275' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--bhx-border)', paddingTop: '16px', fontSize: '13px' }}>
+                <span style={{ color: 'var(--bhx-muted)' }}>
                   BY {post.author.toUpperCase()}
                 </span>
-                <span style={{ color: '#C6884F', fontWeight: 600 }}>
+                <span style={{ color: 'var(--bhx-laterite)', fontWeight: 700 }}>
                   READ INSIGHT &rarr;
                 </span>
               </div>
@@ -68,16 +68,16 @@ export default function BlogView({ onSelectPost, onNavigate }) {
 
         {/* Bottom Brief CTA */}
         <div style={{
-          backgroundColor: '#1E1C1A',
-          border: '1px solid #33302B',
+          backgroundColor: 'var(--bhx-surface)',
+          border: '1px solid var(--bhx-border)',
           borderRadius: '12px',
           padding: '48px 36px',
           textAlign: 'center',
           maxWidth: '640px',
           margin: '0 auto'
         }}>
-          <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '12px' }}>Ready to optimize your content strategy?</h2>
-          <p style={{ fontSize: '15px', color: '#B8AE9C', marginBottom: '28px' }}>
+          <h2 style={{ fontSize: '28px', color: 'var(--bhx-text)', marginBottom: '12px' }}>Ready to optimize your content strategy?</h2>
+          <p style={{ fontSize: '15.5px', color: 'var(--bhx-muted)', marginBottom: '28px' }}>
             Send us a brief or book a 30-minute intro call to discuss your content pipeline.
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>

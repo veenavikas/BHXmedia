@@ -84,77 +84,86 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
     'Not sure'
   ];
 
+  const inputStyle = {
+    width: '100%',
+    padding: '12px 14px',
+    borderRadius: '6px',
+    background: '#FFF8E7',
+    border: '1px solid var(--bhx-border)',
+    color: 'var(--bhx-text)',
+    fontSize: '14px',
+    fontFamily: 'var(--font-main)'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '13px',
+    fontWeight: 600,
+    marginBottom: '6px',
+    color: 'var(--bhx-text)'
+  };
+
   return (
     <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '20px', textAlign: 'left' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Name *
-          </label>
+          <label style={labelStyle}>Name *</label>
           <input
             type="text"
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Your full name"
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Company / Organization *
-          </label>
+          <label style={labelStyle}>Company / Organization *</label>
           <input
             type="text"
             required
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             placeholder="Company name"
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           />
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Role *
-          </label>
+          <label style={labelStyle}>Role *</label>
           <input
             type="text"
             required
             value={formData.role}
             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
             placeholder="e.g. CMO, Founder, Producer"
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Work Email *
-          </label>
+          <label style={labelStyle}>Work Email *</label>
           <input
             type="email"
             required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="name@company.com"
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           />
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Country *
-          </label>
+          <label style={labelStyle}>Country *</label>
           <select
             value={formData.country}
             onChange={(e) => setFormData({ ...formData, country: e.target.value, budget: '' })}
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           >
             <option value="India">India</option>
             <option value="United States">United States</option>
@@ -166,24 +175,20 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Phone Number (Optional)
-          </label>
+          <label style={labelStyle}>Phone Number (Optional)</label>
           <input
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+91 98765 43210"
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           />
         </div>
       </div>
 
       {/* Multi-select Studio */}
       <div>
-        <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '8px', color: 'var(--text-muted-dark)' }}>
-          Studios Needed (Multi-select)
-        </label>
+        <label style={labelStyle}>Studios Needed (Multi-select)</label>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {studiosList.map(st => {
             const selected = formData.studios.includes(st);
@@ -196,10 +201,10 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
                   padding: '8px 14px',
                   borderRadius: '20px',
                   fontSize: '13px',
-                  fontWeight: 500,
-                  border: selected ? '1px solid #C6884F' : '1px solid #33302B',
-                  background: selected ? 'rgba(198, 136, 79, 0.15)' : '#242220',
-                  color: selected ? '#C6884F' : '#B8AE9C',
+                  fontWeight: 600,
+                  border: selected ? '1px solid var(--bhx-laterite)' : '1px solid var(--bhx-border)',
+                  background: selected ? 'var(--bhx-laterite)' : '#FFF8E7',
+                  color: selected ? 'var(--bhx-paper)' : 'var(--bhx-text)',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease'
                 }}
@@ -212,28 +217,24 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
       </div>
 
       <div>
-        <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-          What do you want to achieve? *
-        </label>
+        <label style={labelStyle}>What do you want to achieve? *</label>
         <textarea
           required
           rows={3}
           value={formData.objective}
           onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
           placeholder="Briefly describe your goals, commercial problem, or content needs..."
-          style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px', resize: 'vertical' }}
+          style={{ ...inputStyle, resize: 'vertical' }}
         />
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Budget Range ({isIndia ? 'INR' : 'USD'})
-          </label>
+          <label style={labelStyle}>Budget Range ({isIndia ? 'INR' : 'USD'})</label>
           <select
             value={formData.budget}
             onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           >
             <option value="">Select budget range...</option>
             {budgetOptions.map(opt => (
@@ -243,13 +244,11 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Timeline
-          </label>
+          <label style={labelStyle}>Timeline</label>
           <select
             value={formData.timeline}
             onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           >
             <option value="Immediate / 1-2 weeks">Immediate / 1-2 weeks</option>
             <option value="Within 1 month">Within 1 month</option>
@@ -261,26 +260,22 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            Link or Reference Doc (Optional)
-          </label>
+          <label style={labelStyle}>Link or Reference Doc (Optional)</label>
           <input
             type="text"
             value={formData.linkOrFile}
             onChange={(e) => setFormData({ ...formData, linkOrFile: e.target.value })}
             placeholder="https://drive.google.com/..."
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: 'var(--text-muted-dark)' }}>
-            How did you hear about us?
-          </label>
+          <label style={labelStyle}>How did you hear about us?</label>
           <select
             value={formData.referralSource}
             onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
-            style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px' }}
+            style={inputStyle}
           >
             <option value="LinkedIn">LinkedIn</option>
             <option value="Referral / Word of mouth">Referral / Word of mouth</option>
@@ -304,10 +299,10 @@ export default function BriefForm({ preselectedStudio = '', onSubmitSuccess }) {
           required
           checked={formData.privacyConsent}
           onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
-          style={{ marginTop: '3px', accentColor: '#C6884F' }}
+          style={{ marginTop: '3px', accentColor: 'var(--bhx-laterite)' }}
         />
-        <label htmlFor="privacyConsent" style={{ fontSize: '13px', color: '#B8AE9C', lineHeight: 1.4 }}>
-          I agree to BHX Media handling my submitted project details as described in the <a href="/privacy" style={{ color: '#C6884F', textDecoration: 'underline' }}>Privacy Policy</a>.
+        <label htmlFor="privacyConsent" style={{ fontSize: '13px', color: 'var(--bhx-muted)', lineHeight: 1.4 }}>
+          I agree to BHX Media handling my submitted project details as described in the <a href="/privacy" style={{ color: 'var(--bhx-laterite)', textDecoration: 'underline' }}>Privacy Policy</a>.
         </label>
       </div>
 

@@ -1,0 +1,19 @@
+:root{
+  --bhx-bg: #F6DE9A;  /* Soft Turmeric: Main page background */
+  --bhx-bg-reading: #FAEBC4;  /* Cream: Inner pages, blogs, case studies */
+  --bhx-surface: #FBEBC0;  /* Card: Cards, panels */
+  --bhx-text: #1C1A17;  /* Ink: Headings, body text, dark bands */
+  --bhx-muted: #4E4130;  /* Muted: Secondary text, captions */
+  --bhx-laterite: #7A3E2B;  /* Laterite: Buttons, links, small accents, bindu on yellow */
+  --bhx-turmeric: #E0A21B;  /* Turmeric: Highlights on dark bands only; bindu on ink */
+  --bhx-paper: #F4EFE6;  /* Paper: Text on ink bands and buttons */
+  --bhx-border: #E8C870;  /* Border: Lines, card borders */
+}
+
+/* Usage */
+body{background:var(--bhx-bg);color:var(--bhx-text);font-family:'Bricolage Grotesque',sans-serif;}
+.btn-primary{background:var(--bhx-laterite);color:var(--bhx-paper);}
+.btn-secondary{border:1.5px solid var(--bhx-text);color:var(--bhx-text);}
+.band{background:var(--bhx-text);color:var(--bhx-paper);}
+.band .highlight{color:var(--bhx-turmeric);}
+a{color:var(--bhx-laterite);}

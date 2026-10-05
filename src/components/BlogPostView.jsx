@@ -25,7 +25,7 @@ export default function BlogPostView({ postSlug, onBack, onNavigate, onOpenBooki
   };
 
   return (
-    <article style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', padding: '64px 0 96px' }}>
+    <article style={{ backgroundColor: 'var(--bhx-bg-reading)', minHeight: '100vh', padding: '64px 0 96px', color: 'var(--bhx-text)' }}>
       <div className="wrap" style={{ maxWidth: '800px' }}>
         
         {/* Back Button */}
@@ -40,50 +40,50 @@ export default function BlogPostView({ postSlug, onBack, onNavigate, onOpenBooki
         {/* Metadata Header */}
         <div style={{ marginBottom: '24px' }}>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px' }}>
-            <span className="copper-tag" style={{ fontSize: '11px' }}>ARTICLE</span>
-            <span style={{ fontSize: '12px', color: '#8A8275' }}>{post.date}</span>
-            <span style={{ fontSize: '12px', color: '#8A8275' }}>{post.readTime}</span>
+            <span className="laterite-tag" style={{ fontSize: '11px' }}>ARTICLE</span>
+            <span style={{ fontSize: '12px', color: 'var(--bhx-muted)' }}>{post.date}</span>
+            <span style={{ fontSize: '12px', color: 'var(--bhx-muted)' }}>{post.readTime}</span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', color: '#F4EFE5', lineHeight: 1.15, marginBottom: '16px' }}>
+          <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', color: 'var(--bhx-text)', lineHeight: 1.15, marginBottom: '16px' }}>
             {post.title}
           </h1>
 
-          <p style={{ fontSize: '18px', color: '#B8AE9C', lineHeight: 1.5 }}>
+          <p style={{ fontSize: '18px', color: 'var(--bhx-muted)', lineHeight: 1.5 }}>
             {post.subtitle}
           </p>
         </div>
 
         {/* One-line Definition Callout Box (Section 10 of Brief) */}
         <div style={{
-          backgroundColor: '#242220',
-          border: '1px solid #33302B',
-          borderLeft: '4px solid #C6884F',
+          backgroundColor: 'var(--bhx-surface)',
+          border: '1px solid var(--bhx-border)',
+          borderLeft: '4px solid var(--bhx-laterite)',
           padding: '20px 24px',
           margin: '28px 0',
           borderRadius: '4px'
         }}>
-          <span className="copper-tag" style={{ fontSize: '10px', display: 'block', marginBottom: '4px' }}>
+          <span className="laterite-tag" style={{ fontSize: '10px', display: 'block', marginBottom: '4px' }}>
             PLAIN DEFINITION
           </span>
-          <p style={{ fontSize: '15.5px', fontWeight: 500, color: '#F4EFE5', lineHeight: 1.5 }}>
+          <p style={{ fontSize: '16px', fontWeight: 600, color: 'var(--bhx-text)', lineHeight: 1.5 }}>
             {post.definition}
           </p>
         </div>
 
         {/* Article Body */}
-        <div style={{ fontSize: '16.5px', lineHeight: 1.75, color: '#B8AE9C', marginTop: '32px' }}>
+        <div style={{ fontSize: '17px', lineHeight: 1.75, color: 'var(--bhx-text)', marginTop: '32px' }}>
           {post.content.split('\n\n').map((paragraph, index) => {
             if (paragraph.startsWith('## ')) {
               return (
-                <h2 key={index} style={{ fontSize: '24px', color: '#F4EFE5', margin: '36px 0 16px' }}>
+                <h2 key={index} style={{ fontSize: '24px', color: 'var(--bhx-text)', margin: '36px 0 16px' }}>
                   {paragraph.replace('## ', '')}
                 </h2>
               );
             }
             if (paragraph.startsWith('### ')) {
               return (
-                <h3 key={index} style={{ fontSize: '19px', color: '#F4EFE5', margin: '24px 0 12px' }}>
+                <h3 key={index} style={{ fontSize: '19px', color: 'var(--bhx-text)', margin: '24px 0 12px' }}>
                   {paragraph.replace('### ', '')}
                 </h3>
               );
@@ -95,8 +95,8 @@ export default function BlogPostView({ postSlug, onBack, onNavigate, onOpenBooki
                   fontStyle: 'italic',
                   margin: '24px 0',
                   paddingLeft: '16px',
-                  borderLeft: '2px solid #C6884F',
-                  color: '#F4EFE5'
+                  borderLeft: '3px solid var(--bhx-laterite)',
+                  color: 'var(--bhx-text)'
                 }}>
                   {paragraph.replace('> ', '')}
                 </blockquote>
@@ -106,7 +106,7 @@ export default function BlogPostView({ postSlug, onBack, onNavigate, onOpenBooki
               return (
                 <ul key={index} style={{ margin: '16px 0', paddingLeft: '24px', display: 'grid', gap: '8px' }}>
                   {paragraph.split('\n').map((li, idx) => (
-                    <li key={idx} style={{ fontSize: '16px', color: '#B8AE9C' }}>
+                    <li key={idx} style={{ fontSize: '16.5px', color: 'var(--bhx-muted)' }}>
                       {li.replace('- ', '')}
                     </li>
                   ))}
@@ -114,7 +114,7 @@ export default function BlogPostView({ postSlug, onBack, onNavigate, onOpenBooki
               );
             }
             return (
-              <p key={index} style={{ marginBottom: '20px' }}>
+              <p key={index} style={{ marginBottom: '20px', color: 'var(--bhx-text)' }}>
                 {paragraph.replace('# ', '')}
               </p>
             );
@@ -125,15 +125,15 @@ export default function BlogPostView({ postSlug, onBack, onNavigate, onOpenBooki
         <div style={{
           marginTop: '56px',
           padding: '32px',
-          backgroundColor: '#1E1C1A',
-          border: '1px solid #33302B',
+          backgroundColor: 'var(--bhx-surface)',
+          border: '1px solid var(--bhx-border)',
           borderRadius: '8px'
         }}>
-          <span className="copper-tag" style={{ display: 'block', marginBottom: '8px' }}>ABOUT THE AUTHOR</span>
-          <h3 style={{ fontSize: '22px', color: '#F4EFE5', marginBottom: '8px' }}>
+          <span className="laterite-tag" style={{ display: 'block', marginBottom: '8px' }}>ABOUT THE AUTHOR</span>
+          <h3 style={{ fontSize: '22px', color: 'var(--bhx-text)', marginBottom: '8px' }}>
             Bharath C.S.
           </h3>
-          <p style={{ fontSize: '14px', color: '#B8AE9C', marginBottom: '24px', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '14.5px', color: 'var(--bhx-muted)', marginBottom: '24px', lineHeight: 1.6 }}>
             20+ years running content engines at scale across Amazon India, Sun TV Network, and Kuku TV micro-drama slates. Providing creative strategy and AI quality control for brands and platforms.
           </p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>

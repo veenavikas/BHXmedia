@@ -61,16 +61,16 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
   ];
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', padding: '64px 0 96px' }}>
+    <div style={{ backgroundColor: 'var(--bhx-bg-reading)', minHeight: '100vh', padding: '64px 0 96px', color: 'var(--bhx-text)' }}>
       <div className="wrap">
         
         {/* Header */}
         <div style={{ maxWidth: '800px', marginBottom: '48px' }}>
-          <div className="copper-tag" style={{ marginBottom: '12px' }}>Selected Work &amp; Case Summaries</div>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', color: '#F4EFE5', lineHeight: 1.1, marginBottom: '20px' }}>
+          <div className="laterite-tag" style={{ marginBottom: '12px' }}>Selected Work &amp; Case Summaries</div>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 52px)', color: 'var(--bhx-text)', lineHeight: 1.1, marginBottom: '20px' }}>
             Work engineered for commercial ROI.
           </h1>
-          <p style={{ fontSize: '18px', color: '#B8AE9C', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '18px', color: 'var(--bhx-muted)', lineHeight: 1.6 }}>
             A selection of case summaries across our four BHX studios. Complete private showreels and confidential brand films are available upon request.
           </p>
         </div>
@@ -79,25 +79,25 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '56px' }}>
           {cases.map((item, idx) => (
             <div key={idx} style={{
-              backgroundColor: '#242220',
-              border: '1px solid #33302B',
+              backgroundColor: 'var(--bhx-surface)',
+              border: '1px solid var(--bhx-border)',
               borderRadius: '8px',
               padding: '28px',
               display: 'flex',
               flexDirection: 'column',
-              justify: 'space-between'
+              justifyContent: 'space-between'
             }}>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                  <span className="copper-tag" style={{ fontSize: '11px' }}>{item.studio}</span>
+                  <span className="laterite-tag" style={{ fontSize: '11px' }}>{item.studio}</span>
                 </div>
-                <h3 style={{ fontSize: '20px', color: '#F4EFE5', marginBottom: '8px' }}>{item.title}</h3>
-                <div style={{ fontSize: '13px', color: '#C6884F', fontWeight: 500, marginBottom: '12px' }}>{item.tagline}</div>
-                <p style={{ fontSize: '14px', color: '#B8AE9C', lineHeight: 1.6, marginBottom: '20px' }}>{item.summary}</p>
+                <h3 style={{ fontSize: '20px', color: 'var(--bhx-text)', marginBottom: '8px' }}>{item.title}</h3>
+                <div style={{ fontSize: '13px', color: 'var(--bhx-laterite)', fontWeight: 600, marginBottom: '12px' }}>{item.tagline}</div>
+                <p style={{ fontSize: '14.5px', color: 'var(--bhx-muted)', lineHeight: 1.6, marginBottom: '20px' }}>{item.summary}</p>
               </div>
 
-              <div style={{ paddingTop: '16px', borderTop: '1px solid #33302B', fontSize: '12px', color: '#8A8275' }}>
-                <strong style={{ color: '#F4EFE5' }}>Context:</strong> {item.proof}
+              <div style={{ paddingTop: '16px', borderTop: '1px solid var(--bhx-border)', fontSize: '12.5px', color: 'var(--bhx-muted)' }}>
+                <strong style={{ color: 'var(--bhx-text)' }}>Context:</strong> {item.proof}
               </div>
             </div>
           ))}
@@ -105,16 +105,16 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
 
         {/* Private Reel CTA */}
         <div style={{
-          backgroundColor: '#1E1C1A',
-          border: '1px solid #33302B',
+          backgroundColor: 'var(--bhx-surface)',
+          border: '1px solid var(--bhx-border)',
           borderRadius: '12px',
           padding: '48px 36px',
           textAlign: 'center',
           maxWidth: '700px',
           margin: '0 auto'
         }}>
-          <h2 style={{ fontSize: '28px', color: '#F4EFE5', marginBottom: '12px' }}>Request the Private Reel</h2>
-          <p style={{ fontSize: '15px', color: '#B8AE9C', marginBottom: '28px' }}>
+          <h2 style={{ fontSize: '28px', color: 'var(--bhx-text)', marginBottom: '12px' }}>Request the Private Reel</h2>
+          <p style={{ fontSize: '15.5px', color: 'var(--bhx-muted)', marginBottom: '28px' }}>
             Looking for specific showreels in brand films, AI micro-drama, or TV series? We share full private video reels with verified partners.
           </p>
           <button 
@@ -133,7 +133,7 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
         <div style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: 'rgba(0,0,0,0.8)',
+          backgroundColor: 'rgba(28, 26, 23, 0.75)',
           backdropFilter: 'blur(4px)',
           display: 'flex',
           alignItems: 'center',
@@ -142,8 +142,8 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
           padding: '24px'
         }} onClick={() => setReelModalOpen(false)}>
           <div style={{
-            backgroundColor: '#1E1C1A',
-            border: '1px solid #33302B',
+            backgroundColor: 'var(--bhx-surface)',
+            border: '1px solid var(--bhx-border)',
             borderRadius: '12px',
             padding: '32px',
             maxWidth: '480px',
@@ -151,8 +151,8 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
           }} onClick={(e) => e.stopPropagation()}>
             {!reelSubmitted ? (
               <form onSubmit={handleReelSubmit}>
-                <h3 style={{ fontSize: '22px', color: '#F4EFE5', marginBottom: '8px' }}>Request Private Reel</h3>
-                <p style={{ fontSize: '13.5px', color: '#B8AE9C', marginBottom: '20px' }}>
+                <h3 style={{ fontSize: '22px', color: 'var(--bhx-text)', marginBottom: '8px' }}>Request Private Reel</h3>
+                <p style={{ fontSize: '14px', color: 'var(--bhx-muted)', marginBottom: '20px' }}>
                   Enter your work email to receive access to the private BHX showreel.
                 </p>
                 <input
@@ -161,7 +161,7 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
                   value={reelEmail}
                   onChange={(e) => setReelEmail(e.target.value)}
                   placeholder="name@company.com"
-                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#242220', border: '1px solid #33302B', color: '#F4EFE5', fontSize: '14px', marginBottom: '16px' }}
+                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', background: '#FFF8E7', border: '1px solid var(--bhx-border)', color: 'var(--bhx-text)', fontSize: '14px', marginBottom: '16px' }}
                 />
                 <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
                   <button type="button" onClick={() => setReelModalOpen(false)} className="btn-outline" style={{ padding: '8px 16px', fontSize: '13px' }}>
@@ -174,9 +174,9 @@ export default function WorkView({ onNavigate, onOpenBooking, onOpenReelRequest 
               </form>
             ) : (
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '28px', color: '#C6884F', marginBottom: '12px' }}>✓</div>
-                <h3 style={{ fontSize: '20px', color: '#F4EFE5', marginBottom: '8px' }}>Request Received</h3>
-                <p style={{ fontSize: '14px', color: '#B8AE9C', marginBottom: '20px' }}>
+                <div style={{ fontSize: '28px', color: 'var(--bhx-laterite)', marginBottom: '12px' }}>✓</div>
+                <h3 style={{ fontSize: '20px', color: 'var(--bhx-text)', marginBottom: '8px' }}>Request Received</h3>
+                <p style={{ fontSize: '14px', color: 'var(--bhx-muted)', marginBottom: '20px' }}>
                   We have logged your request for {reelEmail}. The private showreel link will be sent shortly.
                 </p>
                 <button onClick={() => { setReelModalOpen(false); setReelSubmitted(false); }} className="btn-outline" style={{ padding: '8px 16px', fontSize: '13px' }}>

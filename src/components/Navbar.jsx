@@ -15,36 +15,24 @@ export default function Navbar({ minimal = false, currentPath = '/', onNavigate,
       position: 'sticky',
       top: 0,
       zIndex: 100,
-      backgroundColor: 'rgba(27, 26, 24, 0.92)',
+      backgroundColor: 'rgba(246, 222, 154, 0.95)',
       backdropFilter: 'blur(10px)',
-      borderBottom: '1px solid var(--border-dark)',
+      borderBottom: '1px solid var(--bhx-border)',
       padding: '16px 0'
     }}>
       <div className="wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         
-        {/* Logo: Direction B "The Intersection" */}
+        {/* Logo: Official BHX Logo with Laterite Bindu */}
         <a 
           href="/" 
           onClick={(e) => handleNavClick(e, '/')} 
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
+          style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
         >
-          <span style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '24px',
-            height: '24px',
-            borderRadius: '50%',
-            border: '1.5px solid var(--accent)',
-            color: 'var(--accent)',
-            fontSize: '11px',
-            fontWeight: 700
-          }}>
-            ✦
-          </span>
-          <span style={{ fontSize: '18px', fontWeight: 700, letterSpacing: '-0.02em', color: '#F4EFE5' }}>
-            BHX <span style={{ fontWeight: 400, color: '#B8AE9C' }}>Media</span>
-          </span>
+          <img 
+            src="/BHX_standard_ink_yellowbg.svg" 
+            alt="BHX Media" 
+            style={{ height: '34px', width: 'auto', display: 'block' }} 
+          />
         </a>
 
         {/* Full Nav (Hidden if minimal mode on Studio Landing pages) */}
@@ -53,7 +41,7 @@ export default function Navbar({ minimal = false, currentPath = '/', onNavigate,
             <a 
               href="/work" 
               onClick={(e) => handleNavClick(e, '/work')}
-              style={{ fontSize: '14px', fontWeight: 500, color: currentPath === '/work' ? '#C6884F' : '#B8AE9C' }}
+              style={{ fontSize: '15px', fontWeight: 600, color: currentPath === '/work' ? 'var(--bhx-laterite)' : 'var(--bhx-text)' }}
             >
               Work
             </a>
@@ -61,7 +49,7 @@ export default function Navbar({ minimal = false, currentPath = '/', onNavigate,
             <a 
               href="/about" 
               onClick={(e) => handleNavClick(e, '/about')}
-              style={{ fontSize: '14px', fontWeight: 500, color: currentPath === '/about' ? '#C6884F' : '#B8AE9C' }}
+              style={{ fontSize: '15px', fontWeight: 600, color: currentPath === '/about' ? 'var(--bhx-laterite)' : 'var(--bhx-text)' }}
             >
               About
             </a>
@@ -69,15 +57,15 @@ export default function Navbar({ minimal = false, currentPath = '/', onNavigate,
             <a 
               href="/insights" 
               onClick={(e) => handleNavClick(e, '/insights')}
-              style={{ fontSize: '14px', fontWeight: 500, color: currentPath.startsWith('/insights') ? '#C6884F' : '#B8AE9C' }}
+              style={{ fontSize: '15px', fontWeight: 600, color: currentPath.startsWith('/insights') ? 'var(--bhx-laterite)' : 'var(--bhx-text)' }}
             >
               Insights
             </a>
 
             <button 
-              onClick={() => handleNavClick(null, '/brief')} 
+              onClick={(e) => handleNavClick(e, '/brief')} 
               className="btn-outline" 
-              style={{ padding: '8px 16px', fontSize: '13px' }}
+              style={{ padding: '8px 18px', fontSize: '13px' }}
             >
               Start a brief
             </button>
@@ -85,7 +73,7 @@ export default function Navbar({ minimal = false, currentPath = '/', onNavigate,
             <button 
               onClick={onOpenBooking} 
               className="btn-copper" 
-              style={{ padding: '8px 16px', fontSize: '13px' }}
+              style={{ padding: '8px 18px', fontSize: '13px' }}
             >
               Book a call
             </button>
@@ -97,7 +85,7 @@ export default function Navbar({ minimal = false, currentPath = '/', onNavigate,
           <button 
             onClick={onOpenBooking} 
             className="btn-copper" 
-            style={{ padding: '8px 16px', fontSize: '13px' }}
+            style={{ padding: '8px 18px', fontSize: '13px' }}
           >
             Book a call
           </button>
