@@ -6,7 +6,7 @@ export const SITE_CONTENT = {
     tagline: "Better. Human. eXecution.",
     owner: "Bharath C.S.",
     email: "bharath@bhxmedia.com",
-    linkedin: "https://www.linkedin.com/in/bharathcs",
+    linkedin: "https://www.linkedin.com/in/bharathcs-bhx/",
     calendlyUrl: "https://calendly.com/bharath-bhxmedia/30min",
     primaryCta: "Book a 30-minute content audit"
   },

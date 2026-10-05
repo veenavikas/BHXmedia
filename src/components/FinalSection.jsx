@@ -14,7 +14,7 @@ export default function FinalSection({ onOpenBooking }) {
         <div className="contact rv">
           <a href="mailto:bharath@bhxmedia.com">bharath@bhxmedia.com</a>
           &nbsp;·&nbsp;
-          <a href="https://www.linkedin.com/in/bharathcs" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/bharathcs-bhx/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </section>

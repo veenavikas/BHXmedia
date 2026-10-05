@@ -86,7 +86,7 @@ export default function Footer({ onNavigate }) {
           }}>
             <div>© {new Date().getFullYear()} BHX Media. All rights reserved.</div>
             <div>
-              <a href="https://www.linkedin.com/in/bharathcs" target="_blank" rel="noopener noreferrer" style={{ color: '#B8AE9C', textDecoration: 'underline' }}>
+              <a href="https://www.linkedin.com/in/bharathcs-bhx/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8AE9C', textDecoration: 'underline' }}>
                 Bharath C.S. on LinkedIn
               </a>
             </div>

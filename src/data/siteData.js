@@ -9,7 +9,7 @@ export const SITE_DATA = {
     title: "Content Business Specialist",
     experience: "30 years",
     email: "bharath@bhxmedia.com",
-    linkedin: "https://www.linkedin.com/in/bharathcs",
+    linkedin: "https://www.linkedin.com/in/bharathcs-bhx/",
     calendlyUrl: "https://calendly.com/bharath-bhxmedia/30min"
   },
 
