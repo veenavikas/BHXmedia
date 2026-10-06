@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import EngineGraphic from './EngineGraphic';
+import VideoModal from './VideoModal';
 
 export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest }) {
   const [activeTab, setActiveTab] = useState('brands');
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handleNav = (path) => {
     if (onNavigate) {
@@ -11,6 +13,13 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
       window.location.href = path;
     }
   };
+
+  const featuredVideos = [
+    { id: 'B6axexxolTE', title: 'Rakshabandhan Campaign Film', format: 'Brand Film', client: 'Amazon Marketing' },
+    { id: 'WSuvZXaGDpo', title: 'OnePlus Flagship Launch', format: 'Brand Film', client: 'Amazon & OnePlus' },
+    { id: 'K8pQQWg2gLI', title: 'Ads Team Japan Documentary', format: 'Employer Brand', client: 'Amazon APAC' },
+    { id: 'd3aoUUpYE4w', title: 'Amazon Seller Story', format: 'Brand Story', client: 'Amazon Seller Services' }
+  ];
 
   return (
     <div style={{ backgroundColor: 'var(--bhx-bg)', color: 'var(--bhx-text)' }}>
@@ -65,7 +74,7 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
         </div>
       </section>
 
-      {/* 2. THE PROBLEM (Cream reading ground) */}
+      {/* 2. THE PROBLEM */}
       <section style={{ padding: '80px 0', borderBottom: '1px solid var(--bhx-border)', backgroundColor: 'var(--bhx-bg-reading)' }}>
         <div className="wrap" style={{ maxWidth: '840px', textAlign: 'center' }}>
           <div className="laterite-tag" style={{ marginBottom: '14px' }}>The Problem</div>
@@ -126,7 +135,6 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
             
-            {/* Studio 1 */}
             <div 
               onClick={() => handleNav('/studios/longform')}
               style={{
@@ -148,7 +156,6 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
               </div>
             </div>
 
-            {/* Studio 2 */}
             <div 
               onClick={() => handleNav('/studios/cliffhanger')}
               style={{
@@ -170,7 +177,6 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
               </div>
             </div>
 
-            {/* Studio 3 */}
             <div 
               onClick={() => handleNav('/studios/frame')}
               style={{
@@ -192,7 +198,6 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
               </div>
             </div>
 
-            {/* Studio 4 */}
             <div 
               onClick={() => handleNav('/studios/creator-circle')}
               style={{
@@ -218,7 +223,7 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
         </div>
       </section>
 
-      {/* 5. WHO WE WORK WITH (3 Tabs) */}
+      {/* 5. WHO WE WORK WITH */}
       <section style={{ padding: '80px 0', borderBottom: '1px solid var(--bhx-border)', backgroundColor: 'var(--bhx-bg-reading)' }}>
         <div className="wrap">
           <div style={{ marginBottom: '36px' }}>
@@ -226,7 +231,6 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
             <h2 style={{ fontSize: '34px', color: 'var(--bhx-text)' }}>Who We Work With</h2>
           </div>
 
-          {/* Tab Switcher */}
           <div style={{ display: 'flex', gap: '12px', marginBottom: '32px', borderBottom: '1px solid var(--bhx-border)', paddingBottom: '12px' }}>
             <button
               onClick={() => setActiveTab('brands')}
@@ -277,7 +281,6 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
             </button>
           </div>
 
-          {/* Tab Content */}
           <div style={{ padding: '32px', backgroundColor: 'var(--bhx-surface)', borderRadius: '8px', border: '1px solid var(--bhx-border)' }}>
             {activeTab === 'brands' && (
               <div>
@@ -349,20 +352,95 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
         </div>
       </section>
 
-      {/* 7. PROOF & WORK GRID */}
+      {/* 7. PROOF, VIDEO SHOWREELS & WORK GRID */}
       <section style={{ padding: '80px 0', borderBottom: '1px solid var(--bhx-border)' }}>
         <div className="wrap">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '16px', marginBottom: '40px' }}>
             <div>
               <div className="laterite-tag" style={{ marginBottom: '10px' }}>Proof of Execution</div>
-              <h2 style={{ fontSize: '34px', color: 'var(--bhx-text)' }}>Selected Case Summaries</h2>
+              <h2 style={{ fontSize: '34px', color: 'var(--bhx-text)' }}>Featured Video Showreels &amp; Work</h2>
             </div>
             <button onClick={() => handleNav('/work')} className="btn-outline">
-              View Work Index &rarr;
+              View All Work &amp; Videos &rarr;
             </button>
           </div>
 
-          {/* Work Summary Grid (Koto style - 1 line case summaries) */}
+          {/* Featured Video Cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+            {featuredVideos.map(video => (
+              <div 
+                key={video.id}
+                onClick={() => setSelectedVideo(video)}
+                style={{
+                  backgroundColor: 'var(--bhx-surface)',
+                  border: '1px solid var(--bhx-border)',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                }}
+              >
+                <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', backgroundColor: '#1C1A17', overflow: 'hidden' }}>
+                  <img 
+                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} 
+                    alt={video.title} 
+                    loading="lazy"
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundColor: 'rgba(28, 26, 23, 0.35)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{
+                      width: '42px',
+                      height: '42px',
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--bhx-laterite)',
+                      color: 'var(--bhx-paper)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '15px',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                      paddingLeft: '3px'
+                    }}>
+                      ▶
+                    </div>
+                  </div>
+                  <span style={{
+                    position: 'absolute',
+                    top: '8px',
+                    left: '8px',
+                    backgroundColor: 'rgba(28, 26, 23, 0.85)',
+                    color: '#E0A21B',
+                    fontSize: '9.5px',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    padding: '3px 6px',
+                    borderRadius: '4px',
+                    textTransform: 'uppercase'
+                  }}>
+                    {video.format}
+                  </span>
+                </div>
+
+                <div style={{ padding: '14px 16px' }}>
+                  <h3 style={{ fontSize: '15.5px', color: 'var(--bhx-text)', fontWeight: 700, marginBottom: '4px', lineHeight: 1.3 }}>
+                    {video.title}
+                  </h3>
+                  <div style={{ fontSize: '12px', color: 'var(--bhx-muted)' }}>
+                    {video.client}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Selected Case Summaries */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
             
             <div style={{ padding: '24px', backgroundColor: 'var(--bhx-surface)', borderRadius: '8px', border: '1px solid var(--bhx-border)' }}>
@@ -396,7 +474,7 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
         </div>
       </section>
 
-      {/* 8. HOW WE WORK (Cream reading ground) */}
+      {/* 8. HOW WE WORK */}
       <section style={{ padding: '80px 0', borderBottom: '1px solid var(--bhx-border)', backgroundColor: 'var(--bhx-bg-reading)' }}>
         <div className="wrap">
           <div style={{ marginBottom: '40px' }}>
@@ -434,7 +512,7 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
         </div>
       </section>
 
-      {/* 9. FINAL CTA (Ink Dark Band) */}
+      {/* 9. FINAL CTA */}
       <section className="band-dark" style={{ padding: '96px 0', textAlign: 'center', backgroundColor: '#1C1A17' }}>
         <div className="wrap" style={{ maxWidth: '680px' }}>
           <div style={{ color: '#E0A21B', fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '14px' }}>Get Started</div>
@@ -454,6 +532,12 @@ export default function HomeView({ onNavigate, onOpenBooking, onOpenReelRequest 
           </div>
         </div>
       </section>
+
+      {/* Video Modal Player */}
+      <VideoModal 
+        video={selectedVideo} 
+        onClose={() => setSelectedVideo(null)} 
+      />
 
     </div>
   );
