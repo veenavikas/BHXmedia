@@ -62,142 +62,57 @@ export default function MeetPage({ onBackToHome }) {
       </div>
 
       <div className="meet-wrapper">
-        {/* Left Column: BHX Media Brand Header & Services Grid */}
+        {/* Left Column: BHX Media Brand Header & 4 Studios Grid */}
         <div className="meet-brand-section">
           <div className="meet-brand-header">
-            <h1 className="meet-main-logo">
-              B H X <span className="media-text">Media<span className="dot-red">.</span></span>
-            </h1>
-            <p className="meet-sub-tagline">Building ROI with content, at scale.</p>
+            {/* Official Vector Logo with Laterite Bindu */}
+            <a href="/" style={{ display: 'inline-block', textDecoration: 'none' }}>
+              <img 
+                src="/BHX_standard_ink_yellowbg.svg" 
+                alt="BHX Media" 
+                style={{ height: '48px', width: 'auto', display: 'block' }} 
+              />
+            </a>
+            <p className="meet-sub-tagline">
+              We decide what is worth making. Then we make it pay.
+            </p>
           </div>
 
-          {/* Sub-Brands & Offerings Grid */}
-          <div className="meet-logos-grid">
-            {/* 1. BHX Strategy */}
-            <div className="sub-logo-item" title="Content Strategy & Positioning">
-              <svg className="sub-logo-svg" viewBox="0 0 160 48" fill="none">
-                <text x="0" y="24" fontFamily="Inter, sans-serif" fontWeight="800" fontSize="22" fill="#111">strategy</text>
-                <text x="88" y="24" fontFamily="serif" fontStyle="italic" fontWeight="700" fontSize="22" fill="#e53935">fx</text>
-                <rect x="0" y="32" width="150" height="12" rx="2" fill="#1a73e8" />
-                <text x="4" y="41" fontFamily="sans-serif" fontSize="7" fontWeight="bold" fill="#fff">Positioning &amp; Brand Strategy</text>
-              </svg>
+          {/* 4 Specialized BHX Studios Grid */}
+          <div className="meet-studios-grid">
+            {/* 1. Longform */}
+            <div className="meet-studio-card">
+              <div className="meet-studio-title">Longform</div>
+              <div className="meet-studio-tag">by BHX Media</div>
+              <p className="meet-studio-desc">TV shows &amp; long-form series engineered for ratings.</p>
             </div>
 
-            {/* 2. Brand Films */}
-            <div className="sub-logo-item" title="Brand Films & Media">
-              <svg className="sub-logo-svg" viewBox="0 0 140 48" fill="none">
-                <path d="M10 12 C 20 2, 35 22, 50 10 C 65 0, 80 20, 95 10" stroke="#e91e63" strokeWidth="2.5" fill="none" />
-                <text x="8" y="34" fontFamily="Georgia, serif" fontStyle="italic" fontWeight="600" fontSize="22" fill="#e91e63">Films</text>
-                <text x="68" y="34" fontFamily="sans-serif" fontWeight="700" fontSize="20" fill="#e53935">fx</text>
-              </svg>
+            {/* 2. Cliffhanger */}
+            <div className="meet-studio-card">
+              <div className="meet-studio-title">Cliffhanger</div>
+              <div className="meet-studio-tag">by BHX Media</div>
+              <p className="meet-studio-desc">AI micro-drama &amp; Script Intelligence reports.</p>
             </div>
 
-            {/* 3. Performance Marketing */}
-            <div className="sub-logo-item" title="Performance Marketing">
-              <svg className="sub-logo-svg" viewBox="0 0 140 48" fill="none">
-                <text x="0" y="26" fontFamily="Impact, Arial Black" fontSize="20" fill="#ff6600">PERFORM</text>
-                <text x="86" y="26" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="18" fill="#003399">Fx</text>
-                <rect x="110" y="10" width="24" height="18" rx="3" fill="#cc0000" />
-                <text x="113" y="24" fontFamily="sans-serif" fontWeight="bold" fontSize="11" fill="#fff">ROI</text>
-              </svg>
+            {/* 3. Frame */}
+            <div className="meet-studio-card">
+              <div className="meet-studio-title">Frame</div>
+              <div className="meet-studio-tag">by BHX Media</div>
+              <p className="meet-studio-desc">Brand content &amp; commercial films that sell.</p>
             </div>
 
-            {/* 4. Research & Insights */}
-            <div className="sub-logo-item" title="Research & Insights">
-              <svg className="sub-logo-svg" viewBox="0 0 150 48" fill="none">
-                <g fill="#ff9800">
-                  <rect x="0" y="12" width="3" height="16" rx="1.5" />
-                  <rect x="5" y="6" width="3" height="28" rx="1.5" fill="#f57c00" />
-                  <rect x="10" y="2" width="3" height="34" rx="1.5" fill="#e65100" />
-                  <rect x="15" y="8" width="3" height="24" rx="1.5" fill="#f57c00" />
-                  <rect x="20" y="14" width="3" height="12" rx="1.5" fill="#ff9800" />
-                </g>
-                <text x="32" y="28" fontFamily="Inter, sans-serif" fontWeight="600" fontSize="16" fill="#1e293b">Research<tspan fill="#e53935">Fx</tspan></text>
-              </svg>
-            </div>
-
-            {/* 5. BHX Academy */}
-            <div className="sub-logo-item" title="Specialist Network & Academy">
-              <svg className="sub-logo-svg" viewBox="0 0 150 48" fill="none">
-                <text x="0" y="20" fontFamily="Inter, sans-serif" fontWeight="900" fontSize="18" fill="#111">bhx<tspan fill="#e53935">fx</tspan></text>
-                <text x="0" y="38" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="13" letterSpacing="4" fill="#333">ACADEMY</text>
-                <line x1="0" y1="42" x2="135" y2="42" stroke="#e53935" strokeWidth="2" />
-              </svg>
-            </div>
-
-            {/* 6. White Label Services */}
-            <div className="sub-logo-item" title="White Label Content">
-              <svg className="sub-logo-svg" viewBox="0 0 150 48" fill="none">
-                <text x="0" y="20" fontFamily="Inter, sans-serif" fontWeight="900" fontSize="18" fill="#111">bhx<tspan fill="#e53935">media</tspan></text>
-                <text x="0" y="38" fontFamily="Inter, sans-serif" fontWeight="600" fontSize="10" letterSpacing="2" fill="#555">WHITE LABEL</text>
-              </svg>
-            </div>
-
-            {/* 7. Micro-Drama & Creator */}
-            <div className="sub-logo-item" title="Micro-Drama & Creator Content">
-              <svg className="sub-logo-svg" viewBox="0 0 140 48" fill="none">
-                <text x="0" y="20" fontFamily="Inter, sans-serif" fontWeight="800" fontSize="11" letterSpacing="2" fill="#e53935">CREATOR</text>
-                <rect x="0" y="24" width="46" height="20" fill="#e53935" rx="2" />
-                <text x="8" y="40" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="17" fill="#ffffff">FX</text>
-              </svg>
-            </div>
-
-            {/* 8. Employer Branding & PR */}
-            <div className="sub-logo-item" title="Employer Branding & PR">
-              <svg className="sub-logo-svg" viewBox="0 0 130 48" fill="none">
-                <g>
-                  <rect x="0" y="6" width="4" height="34" fill="#9c27b0" />
-                  <rect x="6" y="12" width="4" height="28" fill="#4caf50" />
-                  <rect x="12" y="2" width="4" height="38" fill="#ffeb3b" />
-                  <rect x="18" y="18" width="4" height="22" fill="#e91e63" />
-                </g>
-                <text x="30" y="24" fontFamily="Inter, sans-serif" fontWeight="800" fontSize="20" fill="#222">PR</text>
-                <text x="30" y="40" fontFamily="Inter, sans-serif" fontWeight="800" fontSize="16" fill="#e53935">FX</text>
-              </svg>
-            </div>
-
-            {/* 9. Creative Art & Craft */}
-            <div className="sub-logo-item" title="Creative Craft & Design">
-              <svg className="sub-logo-svg" viewBox="0 0 130 48" fill="none">
-                <text x="10" y="32" fontFamily="Brush Script MT, cursive, Georgia" fontSize="36" fill="#d32f2f">Art</text>
-                <path d="M 5 38 Q 45 46 95 36" stroke="#d32f2f" strokeWidth="2.5" fill="none" />
-              </svg>
-            </div>
-
-            {/* 10. Event Content */}
-            <div className="sub-logo-item" title="Event Content & Launch">
-              <svg className="sub-logo-svg" viewBox="0 0 140 48" fill="none">
-                <text x="0" y="30" fontFamily="Courier New, monospace" fontWeight="900" fontSize="22" letterSpacing="1" fill="#3f51b5">EVENT</text>
-                <text x="84" y="30" fontFamily="sans-serif" fontStyle="italic" fontWeight="700" fontSize="20" fill="#e53935">fx</text>
-              </svg>
-            </div>
-
-            {/* 11. Studio FX */}
-            <div className="sub-logo-item" title="BHX Production Studio">
-              <svg className="sub-logo-svg" viewBox="0 0 140 48" fill="none">
-                <text x="0" y="24" fontFamily="Impact, Arial Black" fontSize="22" letterSpacing="1" fill="#111">STUDIO</text>
-                <text x="0" y="44" fontFamily="Arial Black, sans-serif" fontSize="24" fill="#111">FX</text>
-                <circle cx="36" cy="38" r="4" fill="#e53935" />
-              </svg>
-            </div>
-
-            {/* 12. Business Transformation */}
-            <div className="sub-logo-item" title="Business Transformation">
-              <svg className="sub-logo-svg" viewBox="0 0 160 48" fill="none">
-                <text x="0" y="22" fontFamily="Arial Black, sans-serif" fontSize="20" fill="#2e7d32">BHX</text>
-                <text x="0" y="42" fontFamily="Arial Black, sans-serif" fontSize="20" fill="#e65100">SCALE</text>
-                <text x="54" y="18" fontFamily="sans-serif" fontWeight="bold" fontSize="7" fill="#2e7d32">CONTENT</text>
-                <text x="54" y="27" fontFamily="sans-serif" fontWeight="bold" fontSize="7" fill="#2e7d32">BUSINESS</text>
-                <text x="54" y="36" fontFamily="sans-serif" fontWeight="bold" fontSize="7" fill="#2e7d32">TRANSFORMATION</text>
-                <text x="54" y="45" fontFamily="sans-serif" fontWeight="bold" fontSize="7" fill="#2e7d32">&amp; SCALE</text>
-              </svg>
+            {/* 4. Creator Circle */}
+            <div className="meet-studio-card">
+              <div className="meet-studio-title">Creator Circle</div>
+              <div className="meet-studio-tag">by BHX Media</div>
+              <p className="meet-studio-desc">Influencer marketing driven by transparent ROAS.</p>
             </div>
           </div>
         </div>
 
         {/* Right Column: Click to Join & Google Meet Badge */}
         <div className="meet-action-section">
-          <h2 className="meet-click-label">CLICK TO JOIN</h2>
+          <div className="meet-click-label">CLICK TO JOIN CALL</div>
 
           <div 
             className="meet-join-card" 
@@ -229,7 +144,7 @@ export default function MeetPage({ onBackToHome }) {
           {/* Options Bar: Copy Link / Direct URL */}
           <div className="meet-options-bar">
             <button className="meet-copy-btn" onClick={handleCopy}>
-              {copied ? <Check size={14} color="#00832d" /> : <Copy size={14} />}
+              {copied ? <Check size={16} /> : <Copy size={16} />}
               {copied ? 'Link Copied!' : 'Copy Meet Link'}
             </button>
 
@@ -240,7 +155,7 @@ export default function MeetPage({ onBackToHome }) {
               className="meet-direct-link-btn"
               onClick={(e) => e.stopPropagation()}
             >
-              <ExternalLink size={14} /> Open Directly
+              <ExternalLink size={16} /> Open Directly
             </a>
           </div>
         </div>
@@ -251,7 +166,7 @@ export default function MeetPage({ onBackToHome }) {
         <div className="meet-link-modal-overlay" onClick={() => setIsEditingLink(false)}>
           <div className="meet-link-modal" onClick={(e) => e.stopPropagation()}>
             <h3>Set Custom Google Meet Link</h3>
-            <p style={{ margin: 0, fontSize: '13px', color: '#666' }}>
+            <p style={{ margin: 0, fontSize: '13.5px', color: 'var(--bhx-muted)' }}>
               Paste your Google Meet room URL (e.g. <code>https://meet.google.com/xyz-abc-def</code>):
             </p>
             <input
